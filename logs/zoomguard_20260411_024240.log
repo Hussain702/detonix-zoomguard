@@ -1,0 +1,13 @@
+2026-04-11 02:42:40,377 [INFO] Main: Detonix ZoomGuard starting...
+2026-04-11 02:42:40,379 [INFO] VideoProcessor: Processing: input_videos\ezgif-5e4b9d241c6e0c20.mp4
+2026-04-11 02:42:40,402 [INFO] VideoProcessor: Video info: 600x338 @ 25.0fps, 248 frames
+2026-04-11 02:42:40,408 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-11 02:42:41,594 [INFO] utils.face_detector: FaceDetector initialized with MediaPipe (new API)
+2026-04-11 02:42:41,595 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-11 02:42:41,595 [INFO] utils.deepfake_model: Using pretrained MobileNetV2 backbone (transfer learning mode)
+2026-04-11 02:42:41,793 [INFO] utils.deepfake_model: Deepfake detection model loaded successfully.
+2026-04-11 02:42:41,794 [INFO] orchestrator: Pipeline initialized successfully.
+2026-04-11 02:42:42,063 [WARNING] SessionLogger: ALERT | Video: input_videos\ezgif-5e4b9d241c6e0c20.mp4 | Frame: 6 | Person ID-1 | Score: 50.88%
+2026-04-11 02:42:48,605 [INFO] SessionLogger: Session summary saved to logs\session_20260411_024240.json
+2026-04-11 02:42:48,612 [INFO] VideoProcessor: Done in 6.8s. Output saved: output_results\zoomguard_ezgif-5e4b9d241c6e0c20_024240.mp4
+2026-04-11 02:42:48,636 [INFO] Main: Detonix ZoomGuard session complete.

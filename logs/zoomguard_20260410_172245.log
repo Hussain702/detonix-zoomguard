@@ -1,0 +1,9 @@
+2026-04-10 17:22:45,305 [INFO] Main: Detonix ZoomGuard starting...
+2026-04-10 17:22:45,308 [INFO] VideoProcessor: Processing: input_videos\Untitled video - Made with Clipchamp.mp4
+2026-04-10 17:22:45,342 [INFO] VideoProcessor: Video info: 1920x1080 @ 30.0fps, 1772 frames
+2026-04-10 17:22:45,359 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-10 17:22:46,537 [INFO] utils.face_detector: FaceDetector initialized with MediaPipe (new API)
+2026-04-10 17:22:46,540 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-10 17:22:46,541 [INFO] utils.deepfake_model: Using pretrained MobileNetV2 backbone (transfer learning mode)
+2026-04-10 17:22:46,714 [INFO] utils.deepfake_model: Deepfake detection model loaded successfully.
+2026-04-10 17:22:46,716 [INFO] orchestrator: Pipeline initialized successfully.

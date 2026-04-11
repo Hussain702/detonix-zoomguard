@@ -1,0 +1,810 @@
+{
+  "session_id": "20260411_021705",
+  "start_time": "2026-04-11T02:17:05.475094",
+  "end_time": "2026-04-11T02:18:37.829473",
+  "total_detections": 123,
+  "total_alerts": 0,
+  "alerts": [],
+  "detections": [
+    {
+      "timestamp": "2026-04-11T02:17:50.243616",
+      "frame": 912,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4702
+    },
+    {
+      "timestamp": "2026-04-11T02:17:50.460152",
+      "frame": 915,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4709
+    },
+    {
+      "timestamp": "2026-04-11T02:17:50.676267",
+      "frame": 918,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4707
+    },
+    {
+      "timestamp": "2026-04-11T02:17:50.882392",
+      "frame": 921,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4712
+    },
+    {
+      "timestamp": "2026-04-11T02:17:51.096121",
+      "frame": 924,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4683
+    },
+    {
+      "timestamp": "2026-04-11T02:17:51.308319",
+      "frame": 927,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4692
+    },
+    {
+      "timestamp": "2026-04-11T02:17:51.526396",
+      "frame": 930,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.467
+    },
+    {
+      "timestamp": "2026-04-11T02:17:51.734634",
+      "frame": 933,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4682
+    },
+    {
+      "timestamp": "2026-04-11T02:17:51.932563",
+      "frame": 936,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4664
+    },
+    {
+      "timestamp": "2026-04-11T02:17:52.132397",
+      "frame": 939,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4645
+    },
+    {
+      "timestamp": "2026-04-11T02:17:52.329880",
+      "frame": 942,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4659
+    },
+    {
+      "timestamp": "2026-04-11T02:17:52.561715",
+      "frame": 945,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4653
+    },
+    {
+      "timestamp": "2026-04-11T02:17:52.753333",
+      "frame": 948,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4639
+    },
+    {
+      "timestamp": "2026-04-11T02:17:52.972135",
+      "frame": 951,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4643
+    },
+    {
+      "timestamp": "2026-04-11T02:17:53.197579",
+      "frame": 954,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4646
+    },
+    {
+      "timestamp": "2026-04-11T02:17:53.400422",
+      "frame": 957,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4649
+    },
+    {
+      "timestamp": "2026-04-11T02:17:53.604238",
+      "frame": 960,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4668
+    },
+    {
+      "timestamp": "2026-04-11T02:17:53.827412",
+      "frame": 963,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4662
+    },
+    {
+      "timestamp": "2026-04-11T02:17:54.044945",
+      "frame": 966,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4651
+    },
+    {
+      "timestamp": "2026-04-11T02:17:54.261490",
+      "frame": 969,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4643
+    },
+    {
+      "timestamp": "2026-04-11T02:17:54.482195",
+      "frame": 972,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4634
+    },
+    {
+      "timestamp": "2026-04-11T02:17:54.709703",
+      "frame": 975,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4624
+    },
+    {
+      "timestamp": "2026-04-11T02:17:54.919137",
+      "frame": 978,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.465
+    },
+    {
+      "timestamp": "2026-04-11T02:17:55.136350",
+      "frame": 981,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4643
+    },
+    {
+      "timestamp": "2026-04-11T02:17:55.343654",
+      "frame": 984,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.466
+    },
+    {
+      "timestamp": "2026-04-11T02:17:55.548680",
+      "frame": 987,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4652
+    },
+    {
+      "timestamp": "2026-04-11T02:17:55.780028",
+      "frame": 990,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4649
+    },
+    {
+      "timestamp": "2026-04-11T02:17:55.994411",
+      "frame": 993,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4652
+    },
+    {
+      "timestamp": "2026-04-11T02:17:56.209344",
+      "frame": 996,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4668
+    },
+    {
+      "timestamp": "2026-04-11T02:17:56.457946",
+      "frame": 999,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4668
+    },
+    {
+      "timestamp": "2026-04-11T02:17:56.662747",
+      "frame": 1002,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4667
+    },
+    {
+      "timestamp": "2026-04-11T02:17:56.880899",
+      "frame": 1005,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4681
+    },
+    {
+      "timestamp": "2026-04-11T02:17:57.109551",
+      "frame": 1008,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4662
+    },
+    {
+      "timestamp": "2026-04-11T02:17:57.335424",
+      "frame": 1011,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4663
+    },
+    {
+      "timestamp": "2026-04-11T02:17:57.581787",
+      "frame": 1014,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4653
+    },
+    {
+      "timestamp": "2026-04-11T02:17:57.808595",
+      "frame": 1017,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4661
+    },
+    {
+      "timestamp": "2026-04-11T02:17:58.046217",
+      "frame": 1020,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4655
+    },
+    {
+      "timestamp": "2026-04-11T02:17:58.268366",
+      "frame": 1023,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4647
+    },
+    {
+      "timestamp": "2026-04-11T02:17:58.479779",
+      "frame": 1026,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4653
+    },
+    {
+      "timestamp": "2026-04-11T02:17:58.727213",
+      "frame": 1029,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4656
+    },
+    {
+      "timestamp": "2026-04-11T02:17:58.962762",
+      "frame": 1032,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4664
+    },
+    {
+      "timestamp": "2026-04-11T02:17:59.190287",
+      "frame": 1035,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4666
+    },
+    {
+      "timestamp": "2026-04-11T02:17:59.419044",
+      "frame": 1038,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4671
+    },
+    {
+      "timestamp": "2026-04-11T02:17:59.638077",
+      "frame": 1041,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4681
+    },
+    {
+      "timestamp": "2026-04-11T02:17:59.856166",
+      "frame": 1044,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4698
+    },
+    {
+      "timestamp": "2026-04-11T02:18:00.080919",
+      "frame": 1047,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4687
+    },
+    {
+      "timestamp": "2026-04-11T02:18:00.297844",
+      "frame": 1050,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4688
+    },
+    {
+      "timestamp": "2026-04-11T02:18:00.527490",
+      "frame": 1053,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4704
+    },
+    {
+      "timestamp": "2026-04-11T02:18:00.759188",
+      "frame": 1056,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4707
+    },
+    {
+      "timestamp": "2026-04-11T02:18:00.988508",
+      "frame": 1059,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4716
+    },
+    {
+      "timestamp": "2026-04-11T02:18:01.228372",
+      "frame": 1062,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4719
+    },
+    {
+      "timestamp": "2026-04-11T02:18:01.448482",
+      "frame": 1065,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4727
+    },
+    {
+      "timestamp": "2026-04-11T02:18:01.674948",
+      "frame": 1068,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4737
+    },
+    {
+      "timestamp": "2026-04-11T02:18:01.902784",
+      "frame": 1071,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4727
+    },
+    {
+      "timestamp": "2026-04-11T02:18:02.133304",
+      "frame": 1074,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4738
+    },
+    {
+      "timestamp": "2026-04-11T02:18:19.369606",
+      "frame": 1446,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4711
+    },
+    {
+      "timestamp": "2026-04-11T02:18:19.606307",
+      "frame": 1449,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4712
+    },
+    {
+      "timestamp": "2026-04-11T02:18:19.816443",
+      "frame": 1452,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4693
+    },
+    {
+      "timestamp": "2026-04-11T02:18:20.020698",
+      "frame": 1455,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4683
+    },
+    {
+      "timestamp": "2026-04-11T02:18:20.224963",
+      "frame": 1458,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.468
+    },
+    {
+      "timestamp": "2026-04-11T02:18:20.434735",
+      "frame": 1461,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4672
+    },
+    {
+      "timestamp": "2026-04-11T02:18:20.637301",
+      "frame": 1464,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 3,
+      "is_deepfake": false,
+      "score": 0.4746
+    },
+    {
+      "timestamp": "2026-04-11T02:18:21.002018",
+      "frame": 1470,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 5,
+      "is_deepfake": false,
+      "score": 0.4579
+    },
+    {
+      "timestamp": "2026-04-11T02:18:21.207389",
+      "frame": 1473,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 5,
+      "is_deepfake": false,
+      "score": 0.4602
+    },
+    {
+      "timestamp": "2026-04-11T02:18:21.411059",
+      "frame": 1476,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 5,
+      "is_deepfake": false,
+      "score": 0.4624
+    },
+    {
+      "timestamp": "2026-04-11T02:18:21.648263",
+      "frame": 1479,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 5,
+      "is_deepfake": false,
+      "score": 0.4631
+    },
+    {
+      "timestamp": "2026-04-11T02:18:21.862827",
+      "frame": 1482,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4636
+    },
+    {
+      "timestamp": "2026-04-11T02:18:22.075960",
+      "frame": 1485,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4629
+    },
+    {
+      "timestamp": "2026-04-11T02:18:22.297148",
+      "frame": 1488,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4654
+    },
+    {
+      "timestamp": "2026-04-11T02:18:22.517053",
+      "frame": 1491,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4667
+    },
+    {
+      "timestamp": "2026-04-11T02:18:22.718904",
+      "frame": 1494,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4668
+    },
+    {
+      "timestamp": "2026-04-11T02:18:22.930125",
+      "frame": 1497,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.466
+    },
+    {
+      "timestamp": "2026-04-11T02:18:23.148627",
+      "frame": 1500,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4658
+    },
+    {
+      "timestamp": "2026-04-11T02:18:23.351274",
+      "frame": 1503,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4661
+    },
+    {
+      "timestamp": "2026-04-11T02:18:23.563241",
+      "frame": 1506,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4663
+    },
+    {
+      "timestamp": "2026-04-11T02:18:23.774043",
+      "frame": 1509,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.466
+    },
+    {
+      "timestamp": "2026-04-11T02:18:23.995544",
+      "frame": 1512,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4666
+    },
+    {
+      "timestamp": "2026-04-11T02:18:24.217835",
+      "frame": 1515,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 6,
+      "is_deepfake": false,
+      "score": 0.4672
+    },
+    {
+      "timestamp": "2026-04-11T02:18:24.551695",
+      "frame": 1521,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 7,
+      "is_deepfake": false,
+      "score": 0.4639
+    },
+    {
+      "timestamp": "2026-04-11T02:18:24.773351",
+      "frame": 1524,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 7,
+      "is_deepfake": false,
+      "score": 0.4671
+    },
+    {
+      "timestamp": "2026-04-11T02:18:24.979826",
+      "frame": 1527,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 7,
+      "is_deepfake": false,
+      "score": 0.4678
+    },
+    {
+      "timestamp": "2026-04-11T02:18:25.201146",
+      "frame": 1530,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 7,
+      "is_deepfake": false,
+      "score": 0.469
+    },
+    {
+      "timestamp": "2026-04-11T02:18:25.413286",
+      "frame": 1533,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 7,
+      "is_deepfake": false,
+      "score": 0.469
+    },
+    {
+      "timestamp": "2026-04-11T02:18:25.778417",
+      "frame": 1539,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.4729
+    },
+    {
+      "timestamp": "2026-04-11T02:18:28.796001",
+      "frame": 1602,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4781
+    },
+    {
+      "timestamp": "2026-04-11T02:18:29.017458",
+      "frame": 1605,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4811
+    },
+    {
+      "timestamp": "2026-04-11T02:18:29.225191",
+      "frame": 1608,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4824
+    },
+    {
+      "timestamp": "2026-04-11T02:18:29.430131",
+      "frame": 1611,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4819
+    },
+    {
+      "timestamp": "2026-04-11T02:18:29.635509",
+      "frame": 1614,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4825
+    },
+    {
+      "timestamp": "2026-04-11T02:18:29.848786",
+      "frame": 1617,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4823
+    },
+    {
+      "timestamp": "2026-04-11T02:18:30.031827",
+      "frame": 1620,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4816
+    },
+    {
+      "timestamp": "2026-04-11T02:18:30.282124",
+      "frame": 1623,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4815
+    },
+    {
+      "timestamp": "2026-04-11T02:18:30.485926",
+      "frame": 1626,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.4814
+    },
+    {
+      "timestamp": "2026-04-11T02:18:36.286731",
+      "frame": 1752,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4757
+    },
+    {
+      "timestamp": "2026-04-11T02:18:36.470690",
+      "frame": 1755,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4777
+    },
+    {
+      "timestamp": "2026-04-11T02:18:36.713407",
+      "frame": 1758,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4784
+    },
+    {
+      "timestamp": "2026-04-11T02:18:36.934672",
+      "frame": 1761,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4784
+    },
+    {
+      "timestamp": "2026-04-11T02:18:37.165394",
+      "frame": 1764,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4783
+    },
+    {
+      "timestamp": "2026-04-11T02:18:37.406539",
+      "frame": 1767,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4783
+    },
+    {
+      "timestamp": "2026-04-11T02:18:37.636822",
+      "frame": 1770,
+      "video": "input_videos\\Untitled video - Made with Clipchamp.mp4",
+      "track_id": 10,
+      "is_deepfake": false,
+      "score": 0.4783
+    }
+  ]
+}
