@@ -19,28 +19,7 @@ It processes every face independently across frames, assigns persistent IDs, and
 
 ## System Architecture
 
-```
-input_videos/
-     │
-     ▼
-[Frame Extractor]
-     │ Raw frames (BGR)
-     ▼
-[FaceDetector] ← MediaPipe / OpenCV Haar
-     │ Bounding boxes + face crops
-     ▼
-[DeepSort Tracker] ← Kalman Filter + IoU matching
-     │ Tracked faces with persistent IDs
-     ▼
-[DeepfakeDetector] ← XceptionNet (PyTorch)
-     │ Probability scores per face
-     ▼
-[Alert & Logger] ← JSON logs + annotated video
-     │
-     ▼
-output_results/  + logs/
-```
-
+![Architecture](./architecture.png)
 ---
 
 ## Quick Start
