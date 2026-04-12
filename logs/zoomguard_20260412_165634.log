@@ -1,0 +1,10 @@
+2026-04-12 16:56:34,761 [INFO] VideoProcessor: Processing: input_videos\Untitled video - Made with Clipchamp.mp4
+2026-04-12 16:56:34,876 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-12 16:56:36,479 [INFO] utils.face_detector: FaceDetector initialized with MediaPipe (new API)
+2026-04-12 16:56:36,479 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-12 16:56:36,479 [INFO] utils.deepfake_model: Looking for model at: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-12 16:56:36,479 [INFO] utils.deepfake_model: File exists: True
+2026-04-12 16:56:36,483 [INFO] utils.deepfake_model: Loading XceptionNet from: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-12 16:56:37,042 [INFO] utils.deepfake_model: XceptionNet loaded successfully - FaceForensics++ weights active
+2026-04-12 16:56:37,050 [INFO] orchestrator: Pipeline initialized successfully.
+2026-04-12 16:58:16,057 [INFO] SessionLogger: Session summary saved to logs\session_20260412_165634.json

@@ -1,0 +1,8 @@
+2026-04-12 00:45:09,884 [INFO] VideoProcessor: Processing: input_videos\ezgif-534bdf41108199e9.mp4
+2026-04-12 00:45:09,910 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-12 00:45:11,304 [INFO] utils.face_detector: FaceDetector initialized with MediaPipe (new API)
+2026-04-12 00:45:11,304 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-12 00:45:11,310 [INFO] utils.deepfake_model: Using pretrained MobileNetV2 backbone (transfer learning mode)
+2026-04-12 00:45:11,497 [INFO] utils.deepfake_model: Deepfake detection model loaded successfully.
+2026-04-12 00:45:11,497 [INFO] orchestrator: Pipeline initialized successfully.
+2026-04-12 00:45:23,961 [INFO] SessionLogger: Session summary saved to logs\session_20260412_004509.json

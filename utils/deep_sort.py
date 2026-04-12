@@ -141,7 +141,7 @@ class Track:
 
     def add_deepfake_score(self, score):
         self.deepfake_scores.append(score)
-        if len(self.deepfake_scores) > 15:
+        if len(self.deepfake_scores) > 25:
             self.deepfake_scores.pop(0)
         self.smoothed_score = float(np.mean(self.deepfake_scores))
         self.is_deepfake = self.smoothed_score > 0.5
