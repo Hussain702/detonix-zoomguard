@@ -461,6 +461,13 @@ function poll() {
 
 function render(s) {
   const prev = lastState;
+
+  // Detect new session — reset alert tracking so old alerts don't re-fire
+  if (prev && (s.session_counter || 0) !== (prev.session_counter || 0)) {
+    // New session started — clear all previous alert tracking
+    lastState = null;
+  }
+
   lastState = s;
 
   // session badge

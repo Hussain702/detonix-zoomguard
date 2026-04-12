@@ -8,7 +8,7 @@ Usage:
     python main.py --no-display       # headless
 """
 
-import cv2, os, sys, argparse, logging, time
+import cv2, os, sys, argparse, logging, time, threading, queue
 from pathlib import Path
 from datetime import datetime
 
@@ -54,37 +54,74 @@ def process_video(video_path, output_path, config, show_display=True):
     orch = DetectionOrchestrator(config)
     orch.start_session(str(video_path), total, fps, res)
 
-    frame_num = 0
-    t_start   = time.time()
+    frame_num  = 0
+    t_start    = time.time()
+    display_q  = queue.Queue(maxsize=4)   # small buffer so display never falls behind
+    stop_flag  = threading.Event()
 
     print(f"\n{'='*60}")
     print(f"  {os.path.basename(video_path)}  |  {res} @ {fps:.0f}fps  |  {total} frames")
     print(f"{'='*60}")
 
-    while True:
-        ret, frame = cap.read()
-        if not ret: break
-        frame_num += 1
+    # ── Worker thread: reads + processes frames, puts annotated frame in queue ──
+    def worker():
+        nonlocal frame_num
+        while not stop_flag.is_set():
+            ret, frame = cap.read()
+            if not ret:
+                display_q.put(None)   # sentinel = done
+                break
+            frame_num += 1
+            annotated = orch.process_frame(frame, frame_num, str(video_path))
+            writer.write(annotated)
 
-        annotated = orch.process_frame(frame, frame_num, str(video_path))
-        writer.write(annotated)
+            # Progress print
+            if frame_num % 30 == 0 or frame_num == total:
+                el  = time.time() - t_start
+                fp  = frame_num / el if el > 0 else 0
+                pct = frame_num / total * 100 if total else 0
+                bar = "█" * int(pct/5) + "░" * (20 - int(pct/5))
+                eta = (total - frame_num) / fp if fp > 0 else 0
+                print(f"\r  [{bar}] {pct:.0f}%  {fp:.1f} fps  ETA {eta:.0f}s  ",
+                      end="", flush=True)
 
-        if show_display:
-            disp = annotated
-            if width > 1280 or height > 720:
-                s = min(1280/width, 720/height)
-                disp = cv2.resize(annotated, (int(width*s), int(height*s)))
-            cv2.imshow("Detonix ZoomGuard  (Q = skip)", disp)
-            if cv2.waitKey(1) & 0xFF in (ord('q'), 27): break
+            # Only push to display queue if display is on; drop if full
+            if show_display:
+                try:
+                    display_q.put_nowait(annotated)
+                except queue.Full:
+                    pass   # drop frame — display is slow, that is OK
 
-        if frame_num % 30 == 0 or frame_num == total:
-            el  = time.time() - t_start
-            fp  = frame_num / el if el > 0 else 0
-            pct = frame_num / total * 100 if total else 0
-            bar = "█" * int(pct/5) + "░" * (20 - int(pct/5))
-            eta = (total - frame_num) / fp if fp > 0 else 0
-            print(f"\r  [{bar}] {pct:.0f}%  {fp:.1f} fps  ETA {eta:.0f}s  ", end="", flush=True)
+    t = threading.Thread(target=worker, daemon=True)
+    t.start()
 
+    # ── Main thread: only handles display (very fast) ──────────────────────────
+    target_ms = max(1, int(1000 / fps))   # wait time to match original fps
+
+    if show_display:
+        while True:
+            try:
+                frame_out = display_q.get(timeout=5.0)
+            except queue.Empty:
+                break
+            if frame_out is None:
+                break
+
+            disp = frame_out
+            if width > 960 or height > 540:
+                s    = min(960/width, 540/height)
+                disp = cv2.resize(frame_out, (int(width*s), int(height*s)))
+
+            cv2.imshow("Detonix ZoomGuard  (Q to skip)", disp)
+            key = cv2.waitKey(target_ms) & 0xFF
+            if key in (ord('q'), 27):
+                stop_flag.set()
+                break
+    else:
+        t.join()   # headless mode: just wait for worker
+
+    stop_flag.set()
+    t.join(timeout=10)
     print()
     cap.release()
     writer.release()

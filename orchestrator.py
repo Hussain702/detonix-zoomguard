@@ -52,7 +52,7 @@ class DetectionOrchestrator:
         )
 
         self.deepfake_threshold = config.get('deepfake_threshold', 0.65)
-        self.infer_every_n = config.get('process_every_n_frames', 3)
+        self.infer_every_n = config.get('process_every_n_frames', 5)
         self.frame_count = 0
         self.track_results = {}
         self._last_fps = 0.0
@@ -92,8 +92,30 @@ class DetectionOrchestrator:
         crops = []
 
         if run_detection:
-            face_detections_raw = self.face_detector.detect(frame_bgr)
+            # Resize large frames before detection for speed (720p -> 480p)
+            h_orig, w_orig = frame_bgr.shape[:2]
+            if w_orig > 640:
+                scale = 640 / w_orig
+                small = cv2.resize(frame_bgr, (640, int(h_orig * scale)))
+            else:
+                scale = 1.0
+                small = frame_bgr
+
+            face_detections_raw = self.face_detector.detect(small)
             for fd in face_detections_raw:
+                # Scale bbox back to original frame coordinates
+                bx, by, bw, bh = fd['bbox']
+                if scale != 1.0:
+                    bx = int(bx / scale); by = int(by / scale)
+                    bw = int(bw / scale); bh = int(bh / scale)
+                    # Re-crop from original frame for quality
+                    pad = int(min(bw, bh) * 0.1)
+                    x1 = max(0, bx - pad); y1 = max(0, by - pad)
+                    x2 = min(w_orig, bx + bw + pad)
+                    y2 = min(h_orig, by + bh + pad)
+                    crop = frame_bgr[y1:y2, x1:x2].copy()
+                    fd['bbox'] = [bx, by, bw, bh]
+                    fd['crop'] = crop
                 face_detections.append(Detection(fd['bbox'], fd['confidence']))
                 crops.append(fd['crop'])
 

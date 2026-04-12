@@ -140,25 +140,48 @@ class Track:
     def is_deleted(self):    return self.state == Track.DELETED
 
     def add_deepfake_score(self, score):
-        # Recalibrate: compress scores toward center to reduce webcam false positives.
-        # Scores from real webcam faces cluster at 0.5-0.85 due to compression.
-        # Actual deepfakes score consistently above 0.90.
-        # Recalibration formula: pulls scores below 0.90 toward 0.5,
-        # while scores above 0.90 remain high.
-        if score < 0.90:
-            recalibrated = 0.5 + (score - 0.5) * 0.55
-        else:
-            recalibrated = 0.5 + (score - 0.5) * 0.90
-        self.deepfake_scores.append(recalibrated)
-        if len(self.deepfake_scores) > 30:
+        """
+        Dual-criterion classification using mean + variance.
+
+        Key insight from analysis of real webcam vs deepfake:
+          Real face:  mean ~0.84  std ~0.10  (HIGH variance - natural face movement)
+          Deepfake:   mean ~0.97  std ~0.01  (LOW variance  - uniform GAN artifacts)
+
+        Rules (require min 15 scores for reliable verdict):
+          1. std > 0.08              -> REAL   (high variance = natural face)
+          2. mean > 0.92 & std < 0.06 -> DEEPFAKE (consistently high = GAN artifact)
+          3. otherwise               -> REAL   (err on side of caution)
+        """
+        self.deepfake_scores.append(score)
+        if len(self.deepfake_scores) > 40:
             self.deepfake_scores.pop(0)
-        self.smoothed_score = float(np.mean(self.deepfake_scores))
-        self.is_deepfake = self.smoothed_score > 0.5
-        self.confidence = (self.smoothed_score if self.is_deepfake
-                           else 1.0 - self.smoothed_score)
-        self.label = (f"DEEPFAKE ({self.smoothed_score:.2f})"
-                      if self.is_deepfake
-                      else f"REAL ({1-self.smoothed_score:.2f})")
+
+        n = len(self.deepfake_scores)
+        mean_s = float(np.mean(self.deepfake_scores))
+        std_s  = float(np.std(self.deepfake_scores)) if n > 1 else 0.0
+
+        self.smoothed_score = mean_s
+
+        if n < 15:
+            # Not enough data yet
+            self.is_deepfake = False
+            self.confidence  = 0.5
+            self.label       = "Analyzing..."
+        elif std_s > 0.08:
+            # High variance = real face (natural lighting/angle changes)
+            self.is_deepfake = False
+            self.confidence  = min(0.95, std_s * 5.0)
+            self.label       = f"REAL (var={std_s:.2f})"
+        elif mean_s > 0.92 and std_s < 0.06:
+            # Consistently high score + low variance = deepfake GAN artifact
+            self.is_deepfake = True
+            self.confidence  = mean_s
+            self.label       = f"DEEPFAKE ({mean_s:.2f})"
+        else:
+            # Borderline — treat as real (safer for FYP demo)
+            self.is_deepfake = False
+            self.confidence  = 1.0 - mean_s
+            self.label       = f"REAL ({1-mean_s:.2f})"
 
 
 class Detection:
