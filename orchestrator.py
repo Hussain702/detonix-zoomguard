@@ -48,7 +48,7 @@ class DetectionOrchestrator:
         self.tracker = DeepSortTracker(
             max_iou_distance=config.get('max_iou_distance', 0.75),
             max_age=config.get('max_age', 150),
-            n_init=config.get('n_init', 2)
+            n_init=config.get('n_init', 3)
         )
 
         self.deepfake_threshold = config.get('deepfake_threshold', 0.65)

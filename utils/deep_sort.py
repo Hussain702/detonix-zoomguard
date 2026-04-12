@@ -140,8 +140,17 @@ class Track:
     def is_deleted(self):    return self.state == Track.DELETED
 
     def add_deepfake_score(self, score):
-        self.deepfake_scores.append(score)
-        if len(self.deepfake_scores) > 25:
+        # Recalibrate: compress scores toward center to reduce webcam false positives.
+        # Scores from real webcam faces cluster at 0.5-0.85 due to compression.
+        # Actual deepfakes score consistently above 0.90.
+        # Recalibration formula: pulls scores below 0.90 toward 0.5,
+        # while scores above 0.90 remain high.
+        if score < 0.90:
+            recalibrated = 0.5 + (score - 0.5) * 0.55
+        else:
+            recalibrated = 0.5 + (score - 0.5) * 0.90
+        self.deepfake_scores.append(recalibrated)
+        if len(self.deepfake_scores) > 30:
             self.deepfake_scores.pop(0)
         self.smoothed_score = float(np.mean(self.deepfake_scores))
         self.is_deepfake = self.smoothed_score > 0.5
