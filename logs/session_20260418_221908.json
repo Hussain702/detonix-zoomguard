@@ -1,0 +1,42 @@
+{
+  "session_id": "20260418_221908",
+  "start_time": "2026-04-18T22:19:08.650370",
+  "end_time": "2026-04-18T22:19:14.304070",
+  "total_detections": 4,
+  "total_alerts": 0,
+  "alerts": [],
+  "detections": [
+    {
+      "timestamp": "2026-04-18T22:19:12.454610",
+      "frame": 6,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0001
+    },
+    {
+      "timestamp": "2026-04-18T22:19:12.933481",
+      "frame": 36,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0015
+    },
+    {
+      "timestamp": "2026-04-18T22:19:13.256498",
+      "frame": 48,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0001
+    },
+    {
+      "timestamp": "2026-04-18T22:19:13.656837",
+      "frame": 72,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0001
+    }
+  ]
+}

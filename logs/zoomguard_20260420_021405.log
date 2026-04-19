@@ -1,0 +1,11 @@
+2026-04-20 02:14:06,183 [INFO] VideoProcessor: Processing: input_videos\01__outside_talking_still_laughing.mp4
+2026-04-20 02:14:07,771 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-20 02:14:07,771 [WARNING] utils.face_detector: InsightFace unavailable: No module named 'insightface'
+2026-04-20 02:14:09,571 [WARNING] utils.face_detector: MediaPipe unavailable: module 'mediapipe' has no attribute 'solutions'
+2026-04-20 02:14:09,623 [WARNING] utils.face_detector: Falling back to Haar cascade (no embeddings)
+2026-04-20 02:14:09,623 [INFO] utils.face_detector: FaceDetector ready — backend: haar
+2026-04-20 02:14:09,623 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-20 02:14:09,623 [INFO] utils.deepfake_model: Looking for model at: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-20 02:14:09,628 [INFO] utils.deepfake_model: File exists: True
+2026-04-20 02:14:09,628 [INFO] utils.deepfake_model: Loading XceptionNet from: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-20 02:14:10,268 [INFO] utils.deepfake_model: XceptionNet loaded successfully - FaceForensics++ weights active

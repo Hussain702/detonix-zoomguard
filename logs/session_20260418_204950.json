@@ -1,0 +1,403 @@
+{
+  "session_id": "20260418_204950",
+  "start_time": "2026-04-18T20:49:50.294400",
+  "end_time": "2026-04-18T20:50:08.481139",
+  "total_detections": 48,
+  "total_alerts": 1,
+  "alerts": [
+    {
+      "timestamp": "2026-04-18T20:49:54.673957",
+      "type": "DEEPFAKE_DETECTED",
+      "track_id": 1,
+      "score": 0.9266,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "frame": 42
+    }
+  ],
+  "detections": [
+    {
+      "timestamp": "2026-04-18T20:49:52.507649",
+      "frame": 6,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0
+    },
+    {
+      "timestamp": "2026-04-18T20:49:52.888373",
+      "frame": 12,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0
+    },
+    {
+      "timestamp": "2026-04-18T20:49:53.297596",
+      "frame": 18,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0
+    },
+    {
+      "timestamp": "2026-04-18T20:49:53.657836",
+      "frame": 24,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0
+    },
+    {
+      "timestamp": "2026-04-18T20:49:54.020433",
+      "frame": 30,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8659
+    },
+    {
+      "timestamp": "2026-04-18T20:49:54.342009",
+      "frame": 36,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8962
+    },
+    {
+      "timestamp": "2026-04-18T20:49:54.673957",
+      "frame": 42,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9266
+    },
+    {
+      "timestamp": "2026-04-18T20:49:55.008161",
+      "frame": 48,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9288
+    },
+    {
+      "timestamp": "2026-04-18T20:49:55.332027",
+      "frame": 54,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.936
+    },
+    {
+      "timestamp": "2026-04-18T20:49:55.657864",
+      "frame": 60,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9534
+    },
+    {
+      "timestamp": "2026-04-18T20:49:56.007701",
+      "frame": 66,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9534
+    },
+    {
+      "timestamp": "2026-04-18T20:49:56.342442",
+      "frame": 72,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9534
+    },
+    {
+      "timestamp": "2026-04-18T20:49:56.664923",
+      "frame": 78,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.936
+    },
+    {
+      "timestamp": "2026-04-18T20:49:56.987005",
+      "frame": 84,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9257
+    },
+    {
+      "timestamp": "2026-04-18T20:49:57.312726",
+      "frame": 90,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8865
+    },
+    {
+      "timestamp": "2026-04-18T20:49:57.641845",
+      "frame": 96,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8865
+    },
+    {
+      "timestamp": "2026-04-18T20:49:57.956385",
+      "frame": 102,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8865
+    },
+    {
+      "timestamp": "2026-04-18T20:49:58.290273",
+      "frame": 108,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9257
+    },
+    {
+      "timestamp": "2026-04-18T20:49:58.622822",
+      "frame": 114,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9828
+    },
+    {
+      "timestamp": "2026-04-18T20:49:58.953508",
+      "frame": 120,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9829
+    },
+    {
+      "timestamp": "2026-04-18T20:49:59.272920",
+      "frame": 126,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9904
+    },
+    {
+      "timestamp": "2026-04-18T20:49:59.578817",
+      "frame": 132,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9904
+    },
+    {
+      "timestamp": "2026-04-18T20:49:59.907558",
+      "frame": 138,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9904
+    },
+    {
+      "timestamp": "2026-04-18T20:50:00.225464",
+      "frame": 144,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9901
+    },
+    {
+      "timestamp": "2026-04-18T20:50:00.553382",
+      "frame": 150,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.99
+    },
+    {
+      "timestamp": "2026-04-18T20:50:00.891219",
+      "frame": 156,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9829
+    },
+    {
+      "timestamp": "2026-04-18T20:50:01.330918",
+      "frame": 168,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.9829
+    },
+    {
+      "timestamp": "2026-04-18T20:50:01.672750",
+      "frame": 174,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.9829
+    },
+    {
+      "timestamp": "2026-04-18T20:50:02.005680",
+      "frame": 180,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.9829
+    },
+    {
+      "timestamp": "2026-04-18T20:50:02.357748",
+      "frame": 186,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.9829
+    },
+    {
+      "timestamp": "2026-04-18T20:50:02.724431",
+      "frame": 192,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.859
+    },
+    {
+      "timestamp": "2026-04-18T20:50:03.071111",
+      "frame": 198,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8707
+    },
+    {
+      "timestamp": "2026-04-18T20:50:03.388477",
+      "frame": 204,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8823
+    },
+    {
+      "timestamp": "2026-04-18T20:50:03.688822",
+      "frame": 210,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9344
+    },
+    {
+      "timestamp": "2026-04-18T20:50:04.025807",
+      "frame": 216,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9444
+    },
+    {
+      "timestamp": "2026-04-18T20:50:04.358529",
+      "frame": 222,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9491
+    },
+    {
+      "timestamp": "2026-04-18T20:50:04.689068",
+      "frame": 228,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9759
+    },
+    {
+      "timestamp": "2026-04-18T20:50:05.022091",
+      "frame": 234,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9491
+    },
+    {
+      "timestamp": "2026-04-18T20:50:05.355881",
+      "frame": 240,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9444
+    },
+    {
+      "timestamp": "2026-04-18T20:50:05.692004",
+      "frame": 246,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9491
+    },
+    {
+      "timestamp": "2026-04-18T20:50:06.064230",
+      "frame": 252,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9699
+    },
+    {
+      "timestamp": "2026-04-18T20:50:06.388665",
+      "frame": 258,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9699
+    },
+    {
+      "timestamp": "2026-04-18T20:50:06.724048",
+      "frame": 264,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8825
+    },
+    {
+      "timestamp": "2026-04-18T20:50:07.058054",
+      "frame": 270,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8825
+    },
+    {
+      "timestamp": "2026-04-18T20:50:07.375216",
+      "frame": 276,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9699
+    },
+    {
+      "timestamp": "2026-04-18T20:50:07.704514",
+      "frame": 282,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9704
+    },
+    {
+      "timestamp": "2026-04-18T20:50:08.021871",
+      "frame": 288,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9699
+    },
+    {
+      "timestamp": "2026-04-18T20:50:08.378885",
+      "frame": 294,
+      "video": "input_videos\\WhatsApp Video 2026-04-17 at 5.40.19 PM.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8825
+    }
+  ]
+}

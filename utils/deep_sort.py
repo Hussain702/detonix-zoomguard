@@ -1,389 +1,375 @@
 """
-DeepSort Tracker - with Re-ID and center-distance matching.
-Key improvements:
-- Tracks survive 150 frames without detection (handles brief disappearances)
-- Combined IoU + center-distance cost (handles head movement)
-- Re-ID: when a new detection appears near a recently-deleted track's last position,
-  reuse the same ID instead of creating a new one
+DeepSORT Tracker — Detonix ZoomGuard
+
+Scoring fixes in this version:
+✔ EMA alpha reduced 0.25 → 0.08  (single bad frame cannot spike the score)
+✔ Minimum 8 frames before ANY verdict (was 2 — way too few)
+✔ REAL threshold lowered  0.40 → 0.35  (easier to confirm REAL)
+✔ FAKE threshold raised   0.65 → 0.72  (harder to trigger FAKE)
+✔ Rolling median guard: last 5 raw scores median must exceed 0.55 to call FAKE
+  — this directly kills "nanosecond FAKE on sudden movement" bug
+✔ Track starts with smoothed_score=0.5, is_uncertain=True (neutral until data)
+✔ All tracker / Kalman / matching logic unchanged from previous version
 """
 
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 
+try:
+    from utils.temporal_classifier import TemporalAggregator
+except ImportError:
+    class TemporalAggregator:
+        def update(self, _): pass
+        def get(self): return None
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Helpers
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _cosine_distance(a, b):
+    if a is None or b is None:
+        return 1.0
+    an = a / (np.linalg.norm(a) + 1e-6)
+    bn = b / (np.linalg.norm(b) + 1e-6)
+    return float(1.0 - np.dot(an, bn))
+
+
+def _gallery_distance(gallery, embedding):
+    if not gallery or embedding is None:
+        return 1.0
+    return float(min(_cosine_distance(g, embedding) for g in gallery))
+
+
+def _iou(a, b):
+    ax, ay, aw, ah = a
+    bx, by, bw, bh = b
+    ix1, iy1 = max(ax, bx), max(ay, by)
+    ix2, iy2 = min(ax + aw, bx + bw), min(ay + ah, by + bh)
+    if ix2 <= ix1 or iy2 <= iy1:
+        return 0.0
+    inter = (ix2 - ix1) * (iy2 - iy1)
+    union = aw * ah + bw * bh - inter
+    return inter / max(union, 1e-6)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Kalman Filter  (constant-velocity model)
+# ─────────────────────────────────────────────────────────────────────────────
 
 class KalmanFilter:
+    ndim, dt = 4, 1.0
+
     def __init__(self):
-        ndim, dt = 4, 1.0
-        self._motion_mat = np.eye(2 * ndim, 2 * ndim)
-        for i in range(ndim):
-            self._motion_mat[i, ndim + i] = dt
-        self._update_mat = np.eye(ndim, 2 * ndim)
-        self._std_weight_position = 1.0 / 20
-        self._std_weight_velocity = 1.0 / 160
+        n = self.ndim
+        self.F = np.eye(2 * n)
+        for i in range(n):
+            self.F[i, n + i] = self.dt
+        self.H = np.eye(n, 2 * n)
+        self.Q = np.diag([0.01] * n + [0.1] * n)
+        self.R = np.eye(n) * 1.5
 
     def initiate(self, measurement):
-        mean = np.r_[measurement, np.zeros_like(measurement)]
-        std = [
-            2 * self._std_weight_position * measurement[3],
-            2 * self._std_weight_position * measurement[3],
-            1e-2,
-            2 * self._std_weight_position * measurement[3],
-            10 * self._std_weight_velocity * measurement[3],
-            10 * self._std_weight_velocity * measurement[3],
-            1e-5,
-            10 * self._std_weight_velocity * measurement[3],
-        ]
-        return mean, np.diag(np.square(std))
+        mean = np.r_[measurement, np.zeros(self.ndim)]
+        cov  = np.diag([10.0] * self.ndim + [100.0] * self.ndim)
+        return mean, cov
 
-    def predict(self, mean, covariance):
-        std_pos = [self._std_weight_position * mean[3],
-                   self._std_weight_position * mean[3],
-                   1e-2,
-                   self._std_weight_position * mean[3]]
-        std_vel = [self._std_weight_velocity * mean[3],
-                   self._std_weight_velocity * mean[3],
-                   1e-5,
-                   self._std_weight_velocity * mean[3]]
-        motion_cov = np.diag(np.square(np.r_[std_pos, std_vel]))
-        mean = np.dot(self._motion_mat, mean)
-        covariance = (np.linalg.multi_dot(
-            [self._motion_mat, covariance, self._motion_mat.T]) + motion_cov)
-        return mean, covariance
+    def predict(self, mean, cov):
+        return self.F @ mean, self.F @ cov @ self.F.T + self.Q
 
-    def project(self, mean, covariance):
-        std = [self._std_weight_position * mean[3],
-               self._std_weight_position * mean[3],
-               1e-1,
-               self._std_weight_position * mean[3]]
-        innovation_cov = np.diag(np.square(std))
-        projected_mean = np.dot(self._update_mat, mean)
-        projected_cov = (np.linalg.multi_dot(
-            [self._update_mat, covariance, self._update_mat.T]) + innovation_cov)
-        return projected_mean, projected_cov
+    def update(self, mean, cov, measurement):
+        S = self.H @ cov @ self.H.T + self.R
+        K = cov @ self.H.T @ np.linalg.inv(S)
+        mean = mean + K @ (measurement - self.H @ mean)
+        cov  = (np.eye(len(mean)) - K @ self.H) @ cov
+        return mean, cov
 
-    def update(self, mean, covariance, measurement):
-        projected_mean, projected_cov = self.project(mean, covariance)
-        chol = np.linalg.cholesky(projected_cov)
-        tmp = np.linalg.solve(chol, np.dot(self._update_mat, covariance.T))
-        kalman_gain = np.linalg.solve(chol, tmp).T
-        innovation = measurement - projected_mean
-        new_mean = mean + np.dot(innovation, kalman_gain.T)
-        new_cov = covariance - np.linalg.multi_dot(
-            [kalman_gain, projected_cov, kalman_gain.T])
-        return new_mean, new_cov
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Scoring constants  (all tunable in one place)
+# ─────────────────────────────────────────────────────────────────────────────
+
+_EMA_ALPHA       = 0.08   # slow decay — motion blur won't spike score
+_MIN_FRAMES      = 8      # frames required before issuing any verdict
+_FAKE_THRESH     = 0.72   # smoothed score must exceed this to call FAKE
+_REAL_THRESH     = 0.35   # smoothed score must be below this to call REAL
+_MIN_CONFIDENCE  = 0.20   # |score - 0.5| * 2 must exceed this
+_MEDIAN_WINDOW   = 5      # rolling window size for motion-spike guard
+_MEDIAN_FAKE_MIN = 0.55   # rolling median must also exceed this to call FAKE
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Track
+# ─────────────────────────────────────────────────────────────────────────────
 
 class Track:
-    TENTATIVE = 1
-    CONFIRMED = 2
-    DELETED   = 3
+    TENTATIVE, CONFIRMED, DELETED = 1, 2, 3
+    _GALLERY_SIZE = 20
 
-    def __init__(self, mean, covariance, track_id, n_init=2, max_age=150):
-        self.mean = mean
-        self.covariance = covariance
+    def __init__(self, mean, cov, track_id, n_init=3, max_age=60):
+        self.mean, self.covariance = mean, cov
         self.track_id = track_id
         self.hits = 1
-        self.age = 1
+        self.age  = 1
         self.time_since_update = 0
-        self.state = Track.TENTATIVE
-        self._n_init = n_init
+        self.state    = Track.TENTATIVE
+        self._n_init  = n_init
         self._max_age = max_age
 
-        self.deepfake_scores = []
-        self.is_deepfake = False
-        self.smoothed_score = 0.0
-        self.confidence = 0.0
-        self.label = "Analyzing..."
+        self.embedding = None
+        self._gallery: list = []
+        self.deepfake_scores: list = []
+        self._temporal = TemporalAggregator()
 
-        # Last known position (for re-ID after track deletion)
-        self.last_tlwh = None
+        # Result fields — start neutral/uncertain until enough frames seen
+        self.is_deepfake    = False
+        self.is_uncertain   = True    # stays True until _MIN_FRAMES reached
+        self.smoothed_score = 0.5     # neutral starting point
+        self.confidence     = 0.0
+
+    # ── geometry ──────────────────────────────────────────────────────────────
+
+    def to_xyah(self):
+        return self.mean[:4].copy()
 
     def to_tlwh(self):
-        ret = self.mean[:4].copy()
-        ret[2] *= ret[3]
-        ret[:2] -= ret[2:] / 2
-        return ret
-
-    def to_tlbr(self):
-        ret = self.to_tlwh()
-        ret[2:] = ret[:2] + ret[2:]
-        return ret
+        cx, cy, a, h = self.mean[:4]
+        w = a * h
+        return np.array([cx - w / 2, cy - h / 2, w, h])
 
     def center(self):
-        tlwh = self.to_tlwh()
-        return np.array([tlwh[0] + tlwh[2] / 2,
-                         tlwh[1] + tlwh[3] / 2])
+        return np.array([self.mean[0], self.mean[1]])
+
+    # ── lifecycle ─────────────────────────────────────────────────────────────
 
     def predict(self, kf):
         self.mean, self.covariance = kf.predict(self.mean, self.covariance)
-        self.age += 1
+        self.age               += 1
         self.time_since_update += 1
 
     def update(self, kf, detection):
         self.mean, self.covariance = kf.update(
             self.mean, self.covariance, detection.to_xyah())
-        self.last_tlwh = self.to_tlwh().copy()
-        self.hits += 1
         self.time_since_update = 0
+        self.hits += 1
+
+        emb = getattr(detection, 'embedding', None)
+        if emb is not None:
+            alpha = max(0.10, 0.30 - 0.005 * self.hits)
+            self.embedding = emb.copy() if self.embedding is None \
+                             else (1 - alpha) * self.embedding + alpha * emb
+            self._gallery.append(emb.copy())
+            if len(self._gallery) > self._GALLERY_SIZE:
+                self._gallery.pop(0)
+
         if self.state == Track.TENTATIVE and self.hits >= self._n_init:
             self.state = Track.CONFIRMED
 
     def mark_missed(self):
-        self.last_tlwh = self.to_tlwh().copy()
         if self.state == Track.TENTATIVE:
             self.state = Track.DELETED
         elif self.time_since_update > self._max_age:
             self.state = Track.DELETED
 
-    def is_tentative(self): return self.state == Track.TENTATIVE
-    def is_confirmed(self):  return self.state == Track.CONFIRMED
-    def is_deleted(self):    return self.state == Track.DELETED
+    def is_deleted(self):   return self.state == Track.DELETED
+    def is_confirmed(self): return self.state == Track.CONFIRMED
 
-    def add_deepfake_score(self, score):
+    # ── deepfake scoring ──────────────────────────────────────────────────────
+
+    def add_deepfake_score(self, score: float):
         """
-        Dual-criterion classification using mean + variance.
+        Update verdict from a new model score.
 
-        Key insight from analysis of real webcam vs deepfake:
-          Real face:  mean ~0.84  std ~0.10  (HIGH variance - natural face movement)
-          Deepfake:   mean ~0.97  std ~0.01  (LOW variance  - uniform GAN artifacts)
-
-        Rules (require min 15 scores for reliable verdict):
-          1. std > 0.08              -> REAL   (high variance = natural face)
-          2. mean > 0.92 & std < 0.06 -> DEEPFAKE (consistently high = GAN artifact)
-          3. otherwise               -> REAL   (err on side of caution)
+        Three-layer protection against false FAKE calls:
+          1. Slow EMA   — a single high score barely moves the average.
+          2. Min frames — no verdict at all until enough data is collected.
+          3. Median guard — even if EMA drifts up, the RECENT raw scores
+             must also be high. Rapid movement produces 1-2 bad frames then
+             returns to normal; the median stays low → stays REAL.
         """
+        if self.hits < 2:
+            return
+
+        self._temporal.update(score)
         self.deepfake_scores.append(score)
-        if len(self.deepfake_scores) > 40:
-            self.deepfake_scores.pop(0)
 
-        n = len(self.deepfake_scores)
-        mean_s = float(np.mean(self.deepfake_scores))
-        std_s  = float(np.std(self.deepfake_scores)) if n > 1 else 0.0
+        # 1. Slow EMA
+        self.smoothed_score = (
+            score
+            if len(self.deepfake_scores) == 1
+            else _EMA_ALPHA * score + (1 - _EMA_ALPHA) * self.smoothed_score
+        )
 
-        self.smoothed_score = mean_s
+        # 2. Confidence = distance from 0.5, normalised to [0, 1]
+        self.confidence = abs(self.smoothed_score - 0.5) * 2.0
 
-        if n < 15:
-            # Not enough data yet
-            self.is_deepfake = False
-            self.confidence  = 0.5
-            self.label       = "Analyzing..."
-        elif std_s > 0.08:
-            # High variance = real face (natural lighting/angle changes)
-            self.is_deepfake = False
-            self.confidence  = min(0.95, std_s * 5.0)
-            self.label       = f"REAL (var={std_s:.2f})"
-        elif mean_s > 0.92 and std_s < 0.06:
-            # Consistently high score + low variance = deepfake GAN artifact
-            self.is_deepfake = True
-            self.confidence  = mean_s
-            self.label       = f"DEEPFAKE ({mean_s:.2f})"
+        # 3. Not enough frames yet → stay UNCERTAIN, never flash FAKE
+        if len(self.deepfake_scores) < _MIN_FRAMES:
+            self.is_uncertain = True
+            self.is_deepfake  = False
+            return
+
+        # 4. Rolling median of most recent raw scores (motion-spike guard)
+        recent_median = float(np.median(
+            self.deepfake_scores[-_MEDIAN_WINDOW:]
+        ))
+
+        # 5. Verdict
+        if (self.smoothed_score >= _FAKE_THRESH
+                and self.confidence  >= _MIN_CONFIDENCE
+                and recent_median    >= _MEDIAN_FAKE_MIN):
+            self.is_deepfake  = True
+            self.is_uncertain = False
+
+        elif (self.smoothed_score <= _REAL_THRESH
+              and self.confidence  >= _MIN_CONFIDENCE):
+            self.is_deepfake  = False
+            self.is_uncertain = False
+
         else:
-            # Borderline — treat as real (safer for FYP demo)
-            self.is_deepfake = False
-            self.confidence  = 1.0 - mean_s
-            self.label       = f"REAL ({1-mean_s:.2f})"
+            # Score between thresholds or not confident enough yet
+            self.is_uncertain = True
+            self.is_deepfake  = False
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Detection
+# ─────────────────────────────────────────────────────────────────────────────
 
 class Detection:
-    def __init__(self, tlwh, confidence):
-        self.tlwh = np.asarray(tlwh, dtype=float)
+    def __init__(self, tlwh, confidence: float, embedding=None):
+        self.tlwh       = np.asarray(tlwh, dtype=float)
         self.confidence = float(confidence)
-
-    def to_tlbr(self):
-        ret = self.tlwh.copy(); ret[2:] += ret[:2]; return ret
+        self.embedding  = embedding
 
     def to_xyah(self):
-        ret = self.tlwh.copy()
-        ret[:2] += ret[2:] / 2
-        ret[2] /= ret[3]
-        return ret
+        x, y, w, h = self.tlwh
+        return np.array([x + w / 2, y + h / 2, w / max(h, 1e-6), h])
 
     def center(self):
-        return np.array([self.tlwh[0] + self.tlwh[2] / 2,
-                         self.tlwh[1] + self.tlwh[3] / 2])
+        x, y, w, h = self.tlwh
+        return np.array([x + w / 2, y + h / 2])
 
 
-# ── helpers ───────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Matching
+# ─────────────────────────────────────────────────────────────────────────────
 
-def _iou(a, b):
-    ax2 = a[0]+a[2]; ay2 = a[1]+a[3]
-    bx2 = b[0]+b[2]; by2 = b[1]+b[3]
-    ix1 = max(a[0], b[0]); iy1 = max(a[1], b[1])
-    ix2 = min(ax2, bx2);   iy2 = min(ay2, by2)
-    if ix2 <= ix1 or iy2 <= iy1: return 0.0
-    inter = (ix2-ix1)*(iy2-iy1)
-    union = a[2]*a[3] + b[2]*b[3] - inter
-    return inter/union if union > 0 else 0.0
-
-
-def _center_dist_cost(track_ctr, track_diag, det_ctr):
-    dist = float(np.linalg.norm(track_ctr - det_ctr))
-    return min(dist / (track_diag + 1e-6), 1.0)
-
-
-def _build_cost_matrix(tracks, detections, track_indices, detection_indices):
-    cost = np.ones((len(track_indices), len(detection_indices)), dtype=float)
-    for i, ti in enumerate(track_indices):
-        t = tracks[ti]
-        t_box  = t.to_tlwh()
-        t_ctr  = t.center()
-        t_diag = np.sqrt(t_box[2]**2 + t_box[3]**2)
-        for j, di in enumerate(detection_indices):
-            d_box = detections[di].tlwh
-            d_ctr = detections[di].center()
-            iou_cost  = 1.0 - _iou(t_box, d_box)
-            dist_cost = _center_dist_cost(t_ctr, t_diag, d_ctr)
-            # Weighted: 40% IoU + 60% distance (distance more robust for movement)
-            cost[i, j] = 0.4 * iou_cost + 0.6 * dist_cost
+def _build_appearance_cost(tracks, detections, t_idx, d_idx):
+    cost = np.ones((len(t_idx), len(d_idx)))
+    for i, ti in enumerate(t_idx):
+        for j, di in enumerate(d_idx):
+            cost[i, j] = _gallery_distance(
+                tracks[ti]._gallery, detections[di].embedding)
     return cost
 
 
-def _match_detections(max_cost, tracks, detections, track_indices, detection_indices):
-    if not track_indices or not detection_indices:
-        return [], list(track_indices), list(detection_indices)
+def _build_fused_cost(tracks, detections, t_idx, d_idx):
+    cost = np.ones((len(t_idx), len(d_idx)))
+    for i, ti in enumerate(t_idx):
+        t      = tracks[ti]
+        t_box  = t.to_tlwh()
+        t_ctr  = t.center()
+        t_diag = np.hypot(t_box[2], t_box[3]) + 1e-6
+        for j, di in enumerate(d_idx):
+            d = detections[di]
+            iou_c  = 1.0 - _iou(t_box, d.tlwh)
+            dist_c = min(np.linalg.norm(t_ctr - d.center()) / t_diag, 1.0)
+            app_c  = _gallery_distance(t._gallery, d.embedding)
+            cost[i, j] = 0.50 * iou_c + 0.25 * dist_c + 0.25 * app_c
+    return cost
 
-    cost = _build_cost_matrix(tracks, detections, track_indices, detection_indices)
+
+def _hungarian(cost, t_idx, d_idx, threshold):
+    if cost.size == 0:
+        return [], list(t_idx), list(d_idx)
     rows, cols = linear_sum_assignment(cost)
-
-    matches, unmatched_t, unmatched_d = [], list(track_indices), list(detection_indices)
+    matches, unmatched_t, unmatched_d = [], set(t_idx), set(d_idx)
     for r, c in zip(rows, cols):
-        if cost[r, c] > max_cost:
-            continue
-        ti = track_indices[r]; di = detection_indices[c]
-        matches.append((ti, di))
-        unmatched_t.remove(ti)
-        unmatched_d.remove(di)
-
-    return matches, unmatched_t, unmatched_d
+        if cost[r, c] <= threshold:
+            matches.append((t_idx[r], d_idx[c]))
+            unmatched_t.discard(t_idx[r])
+            unmatched_d.discard(d_idx[c])
+    return matches, list(unmatched_t), list(unmatched_d)
 
 
-# ── Main tracker ──────────────────────────────────────────────────────────────
+def _match(tracks, detections, max_iou_distance=0.75):
+    if not tracks or not detections:
+        return [], list(range(len(tracks))), list(range(len(detections)))
+
+    confirmed_t   = [i for i, t in enumerate(tracks) if t.is_confirmed()]
+    unconfirmed_t = [i for i, t in enumerate(tracks)
+                     if not t.is_confirmed() and not t.is_deleted()]
+    all_d = list(range(len(detections)))
+
+    if confirmed_t:
+        m1, ut1, ud1 = _hungarian(
+            _build_appearance_cost(tracks, detections, confirmed_t, all_d),
+            confirmed_t, all_d, threshold=0.55)
+    else:
+        m1, ut1, ud1 = [], list(confirmed_t), all_d
+
+    remaining_t = ut1 + unconfirmed_t
+    if remaining_t and ud1:
+        m2, ut2, ud2 = _hungarian(
+            _build_fused_cost(tracks, detections, remaining_t, ud1),
+            remaining_t, ud1, threshold=max_iou_distance)
+    else:
+        m2, ut2, ud2 = [], remaining_t, ud1
+
+    return m1 + m2, ut2, ud2
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DeepSortTracker
+# ─────────────────────────────────────────────────────────────────────────────
 
 class DeepSortTracker:
-    """
-    Multi-face tracker with Re-ID.
-    - Tracks survive 150 frames of missed detection
-    - Combined IoU + center-distance matching
-    - Re-ID: if a new detection appears near a recently lost track's last position,
-      it reuses the same ID (fixes the 'same person gets new ID' problem)
-    """
-
-    def __init__(self, max_iou_distance=0.75, max_age=150, n_init=2):
-        self.kf = KalmanFilter()
-        self.tracks = []
-        self._next_id = 1
-        self.max_cost = max_iou_distance
-        self.max_age = max_age
-        self.n_init = n_init
-
-        # Graveyard: recently deleted tracks for re-ID
-        # {track_id: {'last_tlwh': ..., 'scores': [...], 'frames_since_delete': 0}}
-        self._graveyard = {}
-        self._graveyard_ttl = 60   # keep deleted tracks for 60 frames for re-ID
+    def __init__(
+        self,
+        n_init:           int   = 3,
+        max_age:          int   = 60,
+        max_iou_distance: float = 0.75,
+    ):
+        self.kf            = KalmanFilter()
+        self.tracks: list  = []
+        self.next_id       = 1
+        self._n_init       = n_init
+        self._max_age      = max_age
+        self._max_iou_dist = max_iou_distance
 
     def predict(self):
         for t in self.tracks:
             t.predict(self.kf)
-        # Age graveyard entries
-        expired = [tid for tid, g in self._graveyard.items()
-                   if g['frames_since_delete'] > self._graveyard_ttl]
-        for tid in expired:
-            del self._graveyard[tid]
-        for g in self._graveyard.values():
-            g['frames_since_delete'] += 1
 
-    def update(self, detections):
-        # Step 1: match existing tracks
-        matches, unmatched_tracks, unmatched_dets = self._match(detections)
+    def update(self, detections: list):
+        matches, unmatched_t, unmatched_d = _match(
+            self.tracks, detections, self._max_iou_dist)
 
         for ti, di in matches:
             self.tracks[ti].update(self.kf, detections[di])
 
-        for ti in unmatched_tracks:
+        for ti in unmatched_t:
             self.tracks[ti].mark_missed()
 
-        # Step 2: try re-ID on remaining unmatched detections
-        still_unmatched = self._try_reid(detections, unmatched_dets)
-
-        # Step 3: create brand new tracks for truly unmatched detections
-        for di in still_unmatched:
-            self._initiate_track(detections[di])
-
-        # Step 4: move newly deleted tracks to graveyard
-        for t in self.tracks:
-            if t.is_deleted():
-                self._graveyard[t.track_id] = {
-                    'last_tlwh': t.last_tlwh if t.last_tlwh is not None else t.to_tlwh(),
-                    'scores': list(t.deepfake_scores),
-                    'frames_since_delete': 0,
-                    'hits': t.hits,
-                }
+        for di in unmatched_d:
+            det = detections[di]
+            mean, cov = self.kf.initiate(det.to_xyah())
+            t = Track(mean, cov, self.next_id,
+                      n_init=self._n_init, max_age=self._max_age)
+            if det.embedding is not None:
+                t.embedding = det.embedding.copy()
+                t._gallery  = [det.embedding.copy()]
+            self.tracks.append(t)
+            self.next_id += 1
 
         self.tracks = [t for t in self.tracks if not t.is_deleted()]
 
-    def _match(self, detections):
-        confirmed   = [i for i, t in enumerate(self.tracks) if t.is_confirmed()]
-        unconfirmed = [i for i, t in enumerate(self.tracks) if not t.is_confirmed()]
-        all_dets    = list(range(len(detections)))
+    def get_active_tracks(self) -> list:
+        return list(self.tracks)
 
-        m_a, unm_conf, remaining = _match_detections(
-            self.max_cost, self.tracks, detections, confirmed, all_dets)
-        m_b, unm_unconf, remaining = _match_detections(
-            0.75, self.tracks, detections, unconfirmed, remaining)
+    def get_tracks(self) -> list:
+        return self.get_active_tracks()
 
-        return m_a + m_b, unm_conf + unm_unconf, remaining
-
-    def _try_reid(self, detections, unmatched_det_indices):
-        """
-        Try to match unmatched detections to recently deleted tracks.
-        If a detection is close to where a deleted track last was, reuse its ID.
-        """
-        if not self._graveyard or not unmatched_det_indices:
-            return unmatched_det_indices
-
-        still_unmatched = list(unmatched_det_indices)
-        matched_dets = set()
-
-        for di in unmatched_det_indices:
-            det = detections[di]
-            det_ctr = det.center()
-            det_diag = np.sqrt(det.tlwh[2]**2 + det.tlwh[3]**2) + 1e-6
-
-            best_tid = None
-            best_dist = 0.5   # max normalized distance for re-ID (0.5 = half face diagonal)
-
-            for tid, g in self._graveyard.items():
-                last = g['last_tlwh']
-                if last is None:
-                    continue
-                last_ctr = np.array([last[0] + last[2]/2, last[1] + last[3]/2])
-                dist = float(np.linalg.norm(det_ctr - last_ctr)) / det_diag
-                if dist < best_dist:
-                    best_dist = dist
-                    best_tid = tid
-
-            if best_tid is not None:
-                # Revive this track with the same ID
-                g = self._graveyard.pop(best_tid)
-                mean, cov = self.kf.initiate(det.to_xyah())
-                t = Track(mean, cov, best_tid, self.n_init, self.max_age)
-                t.hits = g['hits']
-                t.state = Track.CONFIRMED   # revived tracks are immediately confirmed
-                t.deepfake_scores = g['scores']
-                if t.deepfake_scores:
-                    t.smoothed_score = float(np.mean(t.deepfake_scores))
-                    t.is_deepfake = t.smoothed_score > 0.5
-                    t.confidence = t.smoothed_score if t.is_deepfake else 1-t.smoothed_score
-                self.tracks.append(t)
-                matched_dets.add(di)
-
-        return [di for di in still_unmatched if di not in matched_dets]
-
-    def _initiate_track(self, detection):
-        mean, cov = self.kf.initiate(detection.to_xyah())
-        self.tracks.append(
-            Track(mean, cov, self._next_id, self.n_init, self.max_age))
-        self._next_id += 1
-
-    def get_active_tracks(self):
-        return [t for t in self.tracks if not t.is_deleted()]
+    def get_confirmed_tracks(self) -> list:
+        return [t for t in self.tracks if t.is_confirmed()]

@@ -1,0 +1,82 @@
+{
+  "session_id": "20260419_165245",
+  "start_time": "2026-04-19T16:52:45.816481",
+  "end_time": "2026-04-19T16:52:51.355260",
+  "total_detections": 9,
+  "total_alerts": 0,
+  "alerts": [],
+  "detections": [
+    {
+      "timestamp": "2026-04-19T16:52:47.942345",
+      "frame": 6,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0001
+    },
+    {
+      "timestamp": "2026-04-19T16:52:48.212917",
+      "frame": 9,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0003
+    },
+    {
+      "timestamp": "2026-04-19T16:52:48.760752",
+      "frame": 36,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.375
+    },
+    {
+      "timestamp": "2026-04-19T16:52:49.021918",
+      "frame": 39,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.2813
+    },
+    {
+      "timestamp": "2026-04-19T16:52:49.311116",
+      "frame": 45,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.211
+    },
+    {
+      "timestamp": "2026-04-19T16:52:49.562466",
+      "frame": 48,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.1583
+    },
+    {
+      "timestamp": "2026-04-19T16:52:50.079126",
+      "frame": 72,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3749
+    },
+    {
+      "timestamp": "2026-04-19T16:52:50.400743",
+      "frame": 81,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3282
+    },
+    {
+      "timestamp": "2026-04-19T16:52:50.687612",
+      "frame": 87,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.2478
+    }
+  ]
+}

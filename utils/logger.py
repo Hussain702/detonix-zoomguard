@@ -93,7 +93,12 @@ class SessionLogger:
             print(f"  {'Person':<12} {'Verdict':<14} {'Confidence':<12} {'Frames'}")
             print("-"*60)
             for tid, info in sorted(track_results.items()):
-                verdict = "⚠ DEEPFAKE" if info['is_deepfake'] else "✓ REAL"
+                if info['is_deepfake']:
+                    verdict = "DEEPFAKE"
+                elif info.get('is_uncertain', False):
+                    verdict = "? UNCERTAIN"
+                else:
+                    verdict = "REAL"
                 print(f"  ID-{tid:<9} {verdict:<14} {info['confidence']:.1%}        {info['frames_analyzed']}")
         else:
             print("  No persons tracked.")
