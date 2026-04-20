@@ -1,0 +1,42 @@
+{
+  "session_id": "20260420_191131",
+  "start_time": "2026-04-20T19:11:31.098070",
+  "end_time": "2026-04-20T19:13:18.018986",
+  "total_detections": 4,
+  "total_alerts": 0,
+  "alerts": [],
+  "detections": [
+    {
+      "timestamp": "2026-04-20T19:12:56.709616",
+      "frame": 678,
+      "video": "input_videos\\01__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5
+    },
+    {
+      "timestamp": "2026-04-20T19:12:57.285032",
+      "frame": 681,
+      "video": "input_videos\\01__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0003
+    },
+    {
+      "timestamp": "2026-04-20T19:12:57.854847",
+      "frame": 684,
+      "video": "input_videos\\01__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0003
+    },
+    {
+      "timestamp": "2026-04-20T19:12:58.420018",
+      "frame": 687,
+      "video": "input_videos\\01__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.0003
+    }
+  ]
+}

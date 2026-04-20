@@ -169,10 +169,10 @@ class FaceDetector:
 
     def __init__(
         self,
-        min_detection_confidence: float = 0.45,
-        min_face_size:            int   = 30,
+        min_detection_confidence: float = 0.25,
+        min_face_size:            int   = 20,
         smooth_alpha:             float = 0.65,
-        blur_threshold:           float = 30.0,
+        blur_threshold:           float = 8.0,
     ):
         self.min_face_size  = min_face_size
         self.smooth_alpha   = smooth_alpha
@@ -201,7 +201,7 @@ class FaceDetector:
                 name='buffalo_l',
                 allowed_modules=['detection', 'recognition']
             )
-            self.arcface.prepare(ctx_id=0, det_size=(320, 320))
+            self.arcface.prepare(ctx_id=0, det_size=(640, 640))
             self.backend = 'insightface'
             logger.info("InsightFace / ArcFace buffalo_l initialised")
         except Exception as e:
@@ -292,7 +292,7 @@ class FaceDetector:
             raw = self._detect_haar(frame_bgr)
 
         # ── face-only filter ─────────────────────────────────────────────────
-        return [d for d in raw if self._is_face_bbox(d['bbox'], W, H)]
+        return raw
 
     # ── InsightFace ───────────────────────────────────────────────────────────
 
@@ -325,7 +325,7 @@ class FaceDetector:
             box = self._ema_smooth(idx, [x1, y1, x2 - x1, y2 - y1])
             sx1, sy1, sw, sh = box
             crop = frame_bgr[sy1:sy1 + sh, sx1:sx1 + sw]
-            if crop.size == 0 or self._is_blurry(crop, self.blur_threshold):
+            if crop.size == 0:
                 continue
 
             # Try landmark-aligned crop first (better for XceptionNet)

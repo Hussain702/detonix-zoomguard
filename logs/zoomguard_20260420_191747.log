@@ -1,0 +1,10 @@
+2026-04-20 19:17:48,059 [INFO] VideoProcessor: Processing: input_videos\01__outside_talking_still_laughing.mp4
+2026-04-20 19:17:48,082 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-20 19:17:51,900 [INFO] utils.face_detector: InsightFace / ArcFace buffalo_l initialised
+2026-04-20 19:17:51,915 [INFO] utils.face_detector: FaceDetector ready — backend: insightface
+2026-04-20 19:17:51,915 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-20 19:17:51,915 [INFO] utils.deepfake_model: Looking for model at: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-20 19:17:51,915 [INFO] utils.deepfake_model: File exists: True
+2026-04-20 19:17:51,915 [INFO] utils.deepfake_model: Loading XceptionNet from: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-20 19:17:52,407 [INFO] utils.deepfake_model: XceptionNet loaded successfully - FaceForensics++ weights active
+2026-04-20 19:17:52,411 [INFO] orchestrator: Pipeline initialized successfully.
