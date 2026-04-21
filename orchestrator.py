@@ -1,14 +1,15 @@
 """
 Detection Orchestrator — Detonix ZoomGuard (Production Quality)
 
-Fixes in this version:
-✔ Alert confidence threshold raised to 0.92 to avoid false alerts
-✔ Alert only fires when track has enough frames (n_scores >= _MIN_FRAMES)
-✔ Summary verdict now correctly reads is_deepfake after enough frames
-✔ HUD shows "analyzing..." count during warm-up (not UNCERTAIN)
-✔ draw_results called with correct signature
-✔ ArcFace embedding passed through Detection to tracker
-✔ face_detector.close() safe
+Fixes applied:
+✔ FaceDetector instantiated with correct kwarg names
+  (min_detection_confidence, min_face_size)
+✔ tracker.update() called with frame_w / frame_h so the face-only gate works
+✔ face_detector.detect() returns dicts → access via fd['bbox'] etc.
+✔ crop always present in the dict (face_detector guarantees it)
+✔ draw_results / close() wired correctly
+✔ Alert confidence threshold raised to 0.92 (avoid false alerts)
+✔ HUD shows "analysing" count during warm-up, not UNCERTAIN
 """
 
 import cv2
@@ -59,18 +60,20 @@ class DetectionOrchestrator:
 
         logger.info("Initializing Detonix ZoomGuard pipeline...")
 
+        # ── FaceDetector: use the exact kwarg names the class defines ─────────
         self.face_detector = FaceDetector(
             min_detection_confidence=config.get('face_confidence', 0.4),
-            min_face_size=config.get('min_face_size', 30)
+            min_face_size=config.get('min_face_size', 30),
         )
+
         self.deepfake_detector = DeepfakeDetector(
             model_path=config.get('model_path', None),
-            device=config.get('device', None)
+            device=config.get('device', None),
         )
         self.tracker = DeepSortTracker(
             max_iou_distance=config.get('max_iou_distance', 0.75),
             max_age=config.get('max_age', 60),
-            n_init=config.get('n_init', 3)
+            n_init=config.get('n_init', 3),
         )
 
         self.deepfake_threshold = config.get('deepfake_threshold', 0.65)
@@ -103,15 +106,13 @@ class DetectionOrchestrator:
     def process_frame(self, frame_bgr, frame_number, video_name="video"):
         self.frame_count += 1
 
+        h_orig, w_orig = frame_bgr.shape[:2]
+
         # Step 1: Kalman predict
         self.tracker.predict()
 
         # Step 2: Face detection
-        face_detections = []
-        crops           = []
-
-        h_orig, w_orig = frame_bgr.shape[:2]
-
+        # Downscale for speed, then map boxes back to original resolution
         if w_orig > 640:
             scale = 640 / w_orig
             small = cv2.resize(frame_bgr,
@@ -123,31 +124,38 @@ class DetectionOrchestrator:
 
         raw_faces = self.face_detector.detect(small)
 
+        face_detections = []
+        crops           = []
+
         for fd in raw_faces:
             bx, by, bw, bh = fd['bbox']
 
+            # Map back to original resolution and grab HQ crop
             if scale != 1.0:
-                bx = int(bx / scale); by = int(by / scale)
-                bw = int(bw / scale); bh = int(bh / scale)
+                bx = int(bx / scale);  by = int(by / scale)
+                bw = int(bw / scale);  bh = int(bh / scale)
                 pad = int(min(bw, bh) * 0.10)
-                x1  = max(0, bx - pad);   y1 = max(0, by - pad)
-                x2  = min(w_orig, bx + bw + pad)
-                y2  = min(h_orig, by + bh + pad)
-                hq_crop = frame_bgr[y1:y2, x1:x2]
-                if hq_crop.size > 0:
-                    fd['crop'] = cv2.resize(hq_crop, (224, 224))
-                fd['bbox'] = [bx, by, bw, bh]
+                x1  = max(0, bx - pad);           y1 = max(0, by - pad)
+                x2  = min(w_orig, bx + bw + pad); y2 = min(h_orig, by + bh + pad)
+                hq  = frame_bgr[y1:y2, x1:x2]
+                crop = (cv2.resize(hq, (224, 224))
+                        if hq.size > 0
+                        else np.zeros((224, 224, 3), dtype=np.uint8))
+            else:
+                crop = fd['crop']   # already 224×224 from face_detector
 
             det = Detection(
                 tlwh=[bx, by, bw, bh],
                 confidence=fd['confidence'],
-                embedding=fd.get('embedding')         # ArcFace embedding
+                embedding=fd.get('embedding'),   # ArcFace embedding (may be None)
+                frame_w=w_orig,
+                frame_h=h_orig,
             )
             face_detections.append(det)
-            crops.append(fd['crop'])
+            crops.append(crop)
 
-        # Step 3: Update tracker
-        self.tracker.update(face_detections)
+        # Step 3: Update tracker — pass frame dims so the face-only gate fires
+        self.tracker.update(face_detections, frame_w=w_orig, frame_h=h_orig)
 
         # Step 4: Deepfake inference every N frames
         if crops and self.frame_count % self.infer_every_n == 0:
@@ -170,7 +178,7 @@ class DetectionOrchestrator:
 
                 best_track.add_deepfake_score(score)
                 assigned.add(best_track.track_id)
-                tid = best_track.track_id
+                tid      = best_track.track_id
                 n_scores = len(best_track.deepfake_scores)
 
                 self.session_logger.log_detection(
@@ -186,7 +194,7 @@ class DetectionOrchestrator:
                         'alerted':         False,
                     }
 
-                # Alert — only after enough frames, high confidence, not uncertain
+                # Alert — only after enough frames, high confidence
                 enough_data = n_scores >= _MIN_FRAMES_FOR_VERDICT
                 if (enough_data
                         and best_track.is_deepfake
@@ -227,7 +235,7 @@ class DetectionOrchestrator:
                 'duration': int(elapsed),
             })
 
-        # Step 6: Annotate
+        # Step 6: Annotate frame
         active_tracks = self.tracker.get_active_tracks()
         annotated     = draw_results(frame_bgr, active_tracks)
         annotated     = self._draw_hud(annotated, frame_number, video_name)
@@ -244,7 +252,7 @@ class DetectionOrchestrator:
 
         active = self.tracker.get_active_tracks()
 
-        n_analyzing = sum(
+        n_analysing = sum(
             1 for t in active
             if t.is_confirmed()
             and len(getattr(t, 'deepfake_scores', [])) < _MIN_FRAMES_FOR_VERDICT
@@ -275,7 +283,7 @@ class DetectionOrchestrator:
 
         info = (f"Frame {frame_number}  |  "
                 f"REAL:{n_real}  UNCERTAIN:{n_uncertain}  "
-                f"FAKE:{n_fake}  ANALYZING:{n_analyzing}  |  "
+                f"FAKE:{n_fake}  ANALYSING:{n_analysing}  |  "
                 f"{self._last_fps:.0f} fps  |  {os.path.basename(video_name)}")
         cv2.putText(frame, info, (w // 3 + 10, 28),
                     font, 0.38, (160, 165, 170), 1, cv2.LINE_AA)

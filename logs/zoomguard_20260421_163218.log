@@ -1,0 +1,13 @@
+2026-04-21 16:32:18,970 [INFO] VideoProcessor: Processing: input_videos\deepfakedetection.mp4
+2026-04-21 16:32:20,019 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-21 16:32:20,161 [INFO] utils.face_detector: FaceDetector: Haar cascade ready (scale=1.05, minNbrs=4, skin_thr=0.12)
+2026-04-21 16:32:28,653 [INFO] utils.face_detector: InsightFace: loaded w600k_r50.onnx (512-dim ArcFace)
+2026-04-21 16:32:28,779 [INFO] utils.face_detector: InsightFace ArcFace verified — dim: 512
+2026-04-21 16:32:28,779 [INFO] utils.face_detector: FaceDetector ready | detection=haar-cascade+skin-filter | embedding=insightface-arcface | reid_thresh=0.38
+2026-04-21 16:32:28,781 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-21 16:32:28,783 [INFO] utils.deepfake_model: Looking for model at: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-21 16:32:28,783 [INFO] utils.deepfake_model: File exists: True
+2026-04-21 16:32:28,783 [INFO] utils.deepfake_model: Loading XceptionNet from: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-21 16:32:29,519 [INFO] utils.deepfake_model: XceptionNet loaded successfully - FaceForensics++ weights active
+2026-04-21 16:32:29,531 [INFO] orchestrator: Pipeline initialized successfully.
+2026-04-21 16:33:12,044 [INFO] SessionLogger: Session summary saved to logs\session_20260421_163220.json

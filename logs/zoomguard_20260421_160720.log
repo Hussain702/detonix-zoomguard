@@ -1,0 +1,14 @@
+2026-04-21 16:07:21,336 [INFO] VideoProcessor: Processing: input_videos\deepfakedetection.mp4
+2026-04-21 16:07:21,397 [INFO] orchestrator: Initializing Detonix ZoomGuard pipeline...
+2026-04-21 16:07:23,756 [INFO] utils.face_detector: FaceDetector: detection backend 'mediapipe-solutions' ready.
+2026-04-21 16:07:23,916 [INFO] utils.face_detector: FaceDetector: detection backend 'haar-cascade' ready.
+2026-04-21 16:09:14,274 [WARNING] utils.face_detector: ArcFace not available — using local LBP+Colour embedding. Re-ID will still work well for typical faces. For best results: pip install insightface onnxruntime
+2026-04-21 16:09:14,275 [INFO] utils.face_detector: FaceDetector ready | detection=mediapipe-solutions | embedding=local-lbp-color | reid_thresh=0.40
+2026-04-21 16:09:14,275 [INFO] utils.deepfake_model: Using device: cpu
+2026-04-21 16:09:14,281 [INFO] utils.deepfake_model: Looking for model at: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-21 16:09:14,282 [INFO] utils.deepfake_model: File exists: True
+2026-04-21 16:09:14,282 [INFO] utils.deepfake_model: Loading XceptionNet from: D:\FYP-2\zoomguard\models\deepfake_c0_xception.pkl
+2026-04-21 16:09:15,258 [INFO] utils.deepfake_model: XceptionNet loaded successfully - FaceForensics++ weights active
+2026-04-21 16:09:15,271 [INFO] orchestrator: Pipeline initialized successfully.
+2026-04-21 16:09:15,348 [WARNING] utils.face_detector: Backend 'mediapipe-solutions' failed permanently: 'SymbolDatabase' object has no attribute 'GetPrototype' — removing from pipeline.
+2026-04-21 16:09:46,461 [INFO] SessionLogger: Session summary saved to logs\session_20260421_160721.json

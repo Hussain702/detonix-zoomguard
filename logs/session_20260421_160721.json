@@ -1,0 +1,506 @@
+{
+  "session_id": "20260421_160721",
+  "start_time": "2026-04-21T16:07:21.397344",
+  "end_time": "2026-04-21T16:09:46.455498",
+  "total_detections": 62,
+  "total_alerts": 0,
+  "alerts": [],
+  "detections": [
+    {
+      "timestamp": "2026-04-21T16:09:18.835549",
+      "frame": 3,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8782
+    },
+    {
+      "timestamp": "2026-04-21T16:09:18.838343",
+      "frame": 3,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5093
+    },
+    {
+      "timestamp": "2026-04-21T16:09:19.904813",
+      "frame": 6,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8319
+    },
+    {
+      "timestamp": "2026-04-21T16:09:19.904813",
+      "frame": 6,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5091
+    },
+    {
+      "timestamp": "2026-04-21T16:09:20.970655",
+      "frame": 9,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8398
+    },
+    {
+      "timestamp": "2026-04-21T16:09:20.972665",
+      "frame": 9,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.509
+    },
+    {
+      "timestamp": "2026-04-21T16:09:22.379265",
+      "frame": 12,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.509
+    },
+    {
+      "timestamp": "2026-04-21T16:09:22.379265",
+      "frame": 12,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.781
+    },
+    {
+      "timestamp": "2026-04-21T16:09:23.506478",
+      "frame": 15,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7843
+    },
+    {
+      "timestamp": "2026-04-21T16:09:23.506478",
+      "frame": 15,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5098
+    },
+    {
+      "timestamp": "2026-04-21T16:09:24.267439",
+      "frame": 18,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7593
+    },
+    {
+      "timestamp": "2026-04-21T16:09:24.267949",
+      "frame": 18,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5183
+    },
+    {
+      "timestamp": "2026-04-21T16:09:25.026423",
+      "frame": 21,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7381
+    },
+    {
+      "timestamp": "2026-04-21T16:09:25.042490",
+      "frame": 21,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5004
+    },
+    {
+      "timestamp": "2026-04-21T16:09:25.543126",
+      "frame": 24,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7087
+    },
+    {
+      "timestamp": "2026-04-21T16:09:26.274373",
+      "frame": 27,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7152
+    },
+    {
+      "timestamp": "2026-04-21T16:09:26.274373",
+      "frame": 27,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5007
+    },
+    {
+      "timestamp": "2026-04-21T16:09:27.024345",
+      "frame": 30,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.709
+    },
+    {
+      "timestamp": "2026-04-21T16:09:27.026716",
+      "frame": 30,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5013
+    },
+    {
+      "timestamp": "2026-04-21T16:09:28.305983",
+      "frame": 33,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6551
+    },
+    {
+      "timestamp": "2026-04-21T16:09:28.307994",
+      "frame": 33,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5117
+    },
+    {
+      "timestamp": "2026-04-21T16:09:29.244252",
+      "frame": 36,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6463
+    },
+    {
+      "timestamp": "2026-04-21T16:09:29.244252",
+      "frame": 36,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5152
+    },
+    {
+      "timestamp": "2026-04-21T16:09:29.979736",
+      "frame": 39,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6385
+    },
+    {
+      "timestamp": "2026-04-21T16:09:29.979736",
+      "frame": 39,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5156
+    },
+    {
+      "timestamp": "2026-04-21T16:09:30.480041",
+      "frame": 42,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6406
+    },
+    {
+      "timestamp": "2026-04-21T16:09:31.451174",
+      "frame": 45,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6398
+    },
+    {
+      "timestamp": "2026-04-21T16:09:31.451174",
+      "frame": 45,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.515
+    },
+    {
+      "timestamp": "2026-04-21T16:09:32.329285",
+      "frame": 48,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6493
+    },
+    {
+      "timestamp": "2026-04-21T16:09:32.329285",
+      "frame": 48,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5141
+    },
+    {
+      "timestamp": "2026-04-21T16:09:33.099357",
+      "frame": 51,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6391
+    },
+    {
+      "timestamp": "2026-04-21T16:09:33.102143",
+      "frame": 51,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5134
+    },
+    {
+      "timestamp": "2026-04-21T16:09:33.896393",
+      "frame": 54,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6663
+    },
+    {
+      "timestamp": "2026-04-21T16:09:33.896393",
+      "frame": 54,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5227
+    },
+    {
+      "timestamp": "2026-04-21T16:09:34.413042",
+      "frame": 57,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6864
+    },
+    {
+      "timestamp": "2026-04-21T16:09:35.159590",
+      "frame": 60,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6409
+    },
+    {
+      "timestamp": "2026-04-21T16:09:35.160777",
+      "frame": 60,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5091
+    },
+    {
+      "timestamp": "2026-04-21T16:09:36.145540",
+      "frame": 63,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6295
+    },
+    {
+      "timestamp": "2026-04-21T16:09:36.147019",
+      "frame": 63,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4853
+    },
+    {
+      "timestamp": "2026-04-21T16:09:36.885473",
+      "frame": 66,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6562
+    },
+    {
+      "timestamp": "2026-04-21T16:09:36.885473",
+      "frame": 66,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4918
+    },
+    {
+      "timestamp": "2026-04-21T16:09:37.860467",
+      "frame": 69,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6798
+    },
+    {
+      "timestamp": "2026-04-21T16:09:37.860467",
+      "frame": 69,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4947
+    },
+    {
+      "timestamp": "2026-04-21T16:09:38.602974",
+      "frame": 72,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6747
+    },
+    {
+      "timestamp": "2026-04-21T16:09:38.602974",
+      "frame": 72,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5032
+    },
+    {
+      "timestamp": "2026-04-21T16:09:39.347378",
+      "frame": 75,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6492
+    },
+    {
+      "timestamp": "2026-04-21T16:09:39.348609",
+      "frame": 75,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5041
+    },
+    {
+      "timestamp": "2026-04-21T16:09:40.325702",
+      "frame": 78,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6132
+    },
+    {
+      "timestamp": "2026-04-21T16:09:40.325702",
+      "frame": 78,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5057
+    },
+    {
+      "timestamp": "2026-04-21T16:09:41.099768",
+      "frame": 81,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.61
+    },
+    {
+      "timestamp": "2026-04-21T16:09:41.101305",
+      "frame": 81,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5077
+    },
+    {
+      "timestamp": "2026-04-21T16:09:41.855037",
+      "frame": 84,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.564
+    },
+    {
+      "timestamp": "2026-04-21T16:09:41.855037",
+      "frame": 84,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5107
+    },
+    {
+      "timestamp": "2026-04-21T16:09:42.828458",
+      "frame": 87,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5365
+    },
+    {
+      "timestamp": "2026-04-21T16:09:42.828458",
+      "frame": 87,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5053
+    },
+    {
+      "timestamp": "2026-04-21T16:09:43.579020",
+      "frame": 90,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5604
+    },
+    {
+      "timestamp": "2026-04-21T16:09:43.581029",
+      "frame": 90,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.5076
+    },
+    {
+      "timestamp": "2026-04-21T16:09:44.516715",
+      "frame": 93,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5861
+    },
+    {
+      "timestamp": "2026-04-21T16:09:44.532707",
+      "frame": 93,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4839
+    },
+    {
+      "timestamp": "2026-04-21T16:09:45.731103",
+      "frame": 96,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5729
+    },
+    {
+      "timestamp": "2026-04-21T16:09:45.733112",
+      "frame": 96,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 2,
+      "is_deepfake": false,
+      "score": 0.4632
+    },
+    {
+      "timestamp": "2026-04-21T16:09:46.199834",
+      "frame": 99,
+      "video": "input_videos\\deepfakedetection.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5931
+    }
+  ]
+}
