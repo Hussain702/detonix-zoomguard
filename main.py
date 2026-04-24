@@ -20,6 +20,15 @@ from datetime import datetime
 
 from orchestrator import DetectionOrchestrator
 from utils.logger import setup_logging
+import json
+from utils.temporal_classifier import TemporalAggregator
+
+try:
+    d = json.load(open('calibration.json'))
+    TemporalAggregator.load_calibration(d['T'], d['fake_thr'], d['real_thr'])
+    print(f"Calibration loaded: T={d['T']:.3f}  fake_thr={d['fake_thr']:.3f}")
+except FileNotFoundError:
+    print("No calibration.json — using defaults (T=1.8).")
 
 SUPPORTED_FORMATS = {'.mp4', '.avi', '.mov', '.mkv', '.wmv', '.flv', '.webm', '.m4v'}
 

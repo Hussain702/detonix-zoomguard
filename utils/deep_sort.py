@@ -13,6 +13,18 @@ Guarantees
   tracks; pass 2 fused (IoU + centre dist + appearance) for the rest.
 • Velocity-aware Kalman noise  — process noise scales with face speed so the
   filter stays locked during fast motion.
+
+FIXES (v2)
+──────────────────────────────────────────────────────────────────────────────
+• add_deepfake_score() now reads its verdict EXCLUSIVELY from TemporalAggregator.
+  The old parallel EMA in Track was ignored by TemporalAggregator and caused
+  smoothed_score to stay near 0.5 forever (too-low _EMA_ALPHA=0.08), which
+  kept real videos stuck in UNCERTAIN / incorrectly flipped to FAKE.
+• confidence is now read from TemporalAggregator.confidence instead of the
+  broken  abs(smoothed_score - 0.5)*2  formula.
+• smoothed_score is read from TemporalAggregator.smoothed_score so the HUD
+  and draw_results() display consistent numbers.
+• _MIN_FRAMES lowered to 6 (was 8) to match TemporalAggregator.MIN_FRAMES_*.
 """
 
 import numpy as np
@@ -21,9 +33,21 @@ from scipy.optimize import linear_sum_assignment
 try:
     from utils.temporal_classifier import TemporalAggregator
 except ImportError:
-    class TemporalAggregator:
-        def update(self, _): pass
-        def get(self): return None
+    try:
+        from temporal_classifier import TemporalAggregator
+    except ImportError:
+        class TemporalAggregator:                   # bare stub so import never fails
+            def update(self, _): pass
+            @property
+            def label(self):         return "Analyzing..."
+            @property
+            def is_deepfake(self):   return False
+            @property
+            def is_uncertain(self):  return True
+            @property
+            def confidence(self):    return 0.0
+            @property
+            def smoothed_score(self): return 0.5
 
 
 # ── Face validity (mirrors face_detector constants) ───────────────────────────
@@ -134,13 +158,10 @@ class KalmanFilter:
 
 
 # ── Deepfake scoring constants ────────────────────────────────────────────────
-_EMA_ALPHA       = 0.08
-_MIN_FRAMES      = 8
-_FAKE_THRESH     = 0.72
-_REAL_THRESH     = 0.35
-_MIN_CONFIDENCE  = 0.20
-_MEDIAN_WINDOW   = 5
-_MEDIAN_FAKE_MIN = 0.55
+# NOTE: These are only used for the legacy parallel EMA path which is now
+# DISABLED. Verdict authority belongs entirely to TemporalAggregator.
+# _MIN_FRAMES is kept for the "analysing" gate in orchestrator / draw_results.
+_MIN_FRAMES      = 6    # lowered from 8 to match TemporalAggregator.MIN_FRAMES_*
 _FAST_MOTION_PX  = 25.0
 
 
@@ -163,12 +184,33 @@ class Track:
         self.embedding       = None
         self._gallery        = []
         self.deepfake_scores = []
+
+        # ── Single source of truth for deepfake verdict ───────────────────
+        # All classification logic lives in TemporalAggregator.
+        # Track just proxies the results out via properties below.
         self._temporal       = TemporalAggregator()
-        self.is_deepfake     = False
-        self.is_uncertain    = True
-        self.smoothed_score  = 0.5
-        self.confidence      = 0.0
+
         self._prev_centre    = None
+
+    # ── Proxy properties (read from TemporalAggregator) ──────────────────────
+
+    @property
+    def is_deepfake(self) -> bool:
+        return self._temporal.is_deepfake
+
+    @property
+    def is_uncertain(self) -> bool:
+        return self._temporal.is_uncertain
+
+    @property
+    def smoothed_score(self) -> float:
+        return self._temporal.smoothed_score
+
+    @property
+    def confidence(self) -> float:
+        return self._temporal.confidence
+
+    # ── Geometry ──────────────────────────────────────────────────────────────
 
     def to_tlwh(self):
         cx, cy, a, h = self.mean[:4]
@@ -188,6 +230,8 @@ class Track:
         speed = float(np.linalg.norm(c - self._prev_centre))
         self._prev_centre = c
         return min((speed / _FAST_MOTION_PX) ** 2, 8.0) if speed > _FAST_MOTION_PX else 1.0
+
+    # ── Kalman ────────────────────────────────────────────────────────────────
 
     def predict(self, kf):
         self.mean, self.covariance = kf.predict(
@@ -218,30 +262,30 @@ class Track:
         elif self.time_since_update > self._max_age:
             self.state = Track.DELETED
 
+        # Soft-reset aggregator when track goes missing (possible subject change)
+        if self.time_since_update == 1:
+            self._temporal.reset_window()
+
     def is_deleted(self):   return self.state == Track.DELETED
     def is_confirmed(self): return self.state == Track.CONFIRMED
 
     def add_deepfake_score(self, score: float):
+        """
+        Feed a raw XceptionNet/MobileNetV2 score to the temporal aggregator.
+
+        The TemporalAggregator owns ALL classification logic:
+          - calibration
+          - EMA smoothing
+          - variance / confidence
+          - REAL / DEEPFAKE / UNCERTAIN decision
+
+        Track.is_deepfake, .is_uncertain, .smoothed_score, .confidence are
+        all proxied from _temporal so every consumer sees consistent data.
+        """
         if self.hits < 2:
             return
-        self._temporal.update(score)
         self.deepfake_scores.append(score)
-        self.smoothed_score = (score if len(self.deepfake_scores) == 1
-                               else _EMA_ALPHA * score + (1 - _EMA_ALPHA) * self.smoothed_score)
-        self.confidence = abs(self.smoothed_score - 0.5) * 2.0
-
-        if len(self.deepfake_scores) < _MIN_FRAMES:
-            self.is_uncertain = True;  self.is_deepfake = False;  return
-
-        med = float(np.median(self.deepfake_scores[-_MEDIAN_WINDOW:]))
-        if (self.smoothed_score >= _FAKE_THRESH
-                and self.confidence  >= _MIN_CONFIDENCE
-                and med              >= _MEDIAN_FAKE_MIN):
-            self.is_deepfake = True;  self.is_uncertain = False
-        elif self.smoothed_score <= _REAL_THRESH and self.confidence >= _MIN_CONFIDENCE:
-            self.is_deepfake = False;  self.is_uncertain = False
-        else:
-            self.is_uncertain = True;  self.is_deepfake = False
+        self._temporal.update(score)
 
 
 # ── Detection wrapper ─────────────────────────────────────────────────────────
