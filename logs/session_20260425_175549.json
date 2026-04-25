@@ -1,0 +1,330 @@
+{
+  "session_id": "20260425_175549",
+  "start_time": "2026-04-25T17:55:49.385799",
+  "end_time": "2026-04-25T17:56:13.857960",
+  "total_detections": 40,
+  "total_alerts": 0,
+  "alerts": [],
+  "detections": [
+    {
+      "timestamp": "2026-04-25T17:55:56.945460",
+      "frame": 3,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8075
+    },
+    {
+      "timestamp": "2026-04-25T17:55:57.499355",
+      "frame": 6,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7711
+    },
+    {
+      "timestamp": "2026-04-25T17:55:57.999450",
+      "frame": 9,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7693
+    },
+    {
+      "timestamp": "2026-04-25T17:55:58.444121",
+      "frame": 12,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7452
+    },
+    {
+      "timestamp": "2026-04-25T17:55:58.853015",
+      "frame": 15,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7242
+    },
+    {
+      "timestamp": "2026-04-25T17:55:59.274988",
+      "frame": 18,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7441
+    },
+    {
+      "timestamp": "2026-04-25T17:55:59.693049",
+      "frame": 21,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7323
+    },
+    {
+      "timestamp": "2026-04-25T17:56:00.107171",
+      "frame": 24,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7041
+    },
+    {
+      "timestamp": "2026-04-25T17:56:00.545082",
+      "frame": 27,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7483
+    },
+    {
+      "timestamp": "2026-04-25T17:56:00.947519",
+      "frame": 30,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.713
+    },
+    {
+      "timestamp": "2026-04-25T17:56:01.399065",
+      "frame": 33,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6812
+    },
+    {
+      "timestamp": "2026-04-25T17:56:01.830431",
+      "frame": 36,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6704
+    },
+    {
+      "timestamp": "2026-04-25T17:56:02.261456",
+      "frame": 39,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6958
+    },
+    {
+      "timestamp": "2026-04-25T17:56:02.698077",
+      "frame": 42,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6575
+    },
+    {
+      "timestamp": "2026-04-25T17:56:03.124932",
+      "frame": 45,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.721
+    },
+    {
+      "timestamp": "2026-04-25T17:56:03.551032",
+      "frame": 48,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6692
+    },
+    {
+      "timestamp": "2026-04-25T17:56:03.970404",
+      "frame": 51,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7388
+    },
+    {
+      "timestamp": "2026-04-25T17:56:04.389378",
+      "frame": 54,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7908
+    },
+    {
+      "timestamp": "2026-04-25T17:56:04.810673",
+      "frame": 57,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8294
+    },
+    {
+      "timestamp": "2026-04-25T17:56:05.247332",
+      "frame": 60,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8647
+    },
+    {
+      "timestamp": "2026-04-25T17:56:05.663868",
+      "frame": 63,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8925
+    },
+    {
+      "timestamp": "2026-04-25T17:56:06.092319",
+      "frame": 66,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.8587
+    },
+    {
+      "timestamp": "2026-04-25T17:56:06.516206",
+      "frame": 69,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7347
+    },
+    {
+      "timestamp": "2026-04-25T17:56:06.955194",
+      "frame": 72,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6666
+    },
+    {
+      "timestamp": "2026-04-25T17:56:07.389135",
+      "frame": 75,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6247
+    },
+    {
+      "timestamp": "2026-04-25T17:56:07.824295",
+      "frame": 78,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6013
+    },
+    {
+      "timestamp": "2026-04-25T17:56:08.244855",
+      "frame": 81,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5843
+    },
+    {
+      "timestamp": "2026-04-25T17:56:08.661347",
+      "frame": 84,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5722
+    },
+    {
+      "timestamp": "2026-04-25T17:56:09.086783",
+      "frame": 87,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5647
+    },
+    {
+      "timestamp": "2026-04-25T17:56:09.519029",
+      "frame": 90,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.555
+    },
+    {
+      "timestamp": "2026-04-25T17:56:09.950592",
+      "frame": 93,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5941
+    },
+    {
+      "timestamp": "2026-04-25T17:56:10.396071",
+      "frame": 96,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6176
+    },
+    {
+      "timestamp": "2026-04-25T17:56:10.813828",
+      "frame": 99,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6382
+    },
+    {
+      "timestamp": "2026-04-25T17:56:11.233338",
+      "frame": 102,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6766
+    },
+    {
+      "timestamp": "2026-04-25T17:56:11.677940",
+      "frame": 105,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6882
+    },
+    {
+      "timestamp": "2026-04-25T17:56:12.094957",
+      "frame": 108,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6434
+    },
+    {
+      "timestamp": "2026-04-25T17:56:12.513388",
+      "frame": 111,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6364
+    },
+    {
+      "timestamp": "2026-04-25T17:56:12.911241",
+      "frame": 114,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6642
+    },
+    {
+      "timestamp": "2026-04-25T17:56:13.311290",
+      "frame": 117,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6958
+    },
+    {
+      "timestamp": "2026-04-25T17:56:13.727114",
+      "frame": 120,
+      "video": "input_videos\\WIN_20260412_16_59_13_Pro.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6898
+    }
+  ]
+}
