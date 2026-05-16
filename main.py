@@ -1,5 +1,5 @@
 """
-Detonix ZoomGuard — Main Entry Point
+Main Entry Point
 
 Usage:
     python main.py                    # terminal only
