@@ -64,6 +64,10 @@ def parse_args():
     p.add_argument('--dashboard',  action='store_true',
                    help='Launch live browser dashboard at http://localhost:5050')
     p.add_argument('--face-conf',  type=float, default=0.4)
+    p.add_argument('--min-face-size', type=int, default=24,
+                   help='Minimum face side in px. Lower for small/low-res faces '
+                        '(default 24 — was hardcoded 60, which silently dropped '
+                        'faces smaller than that).')
     p.add_argument('--max-age',    type=int,   default=150)
     return p.parse_args()
 
@@ -230,7 +234,7 @@ def main():
         'deepfake_threshold':     args.threshold,
         'process_every_n_frames': args.skip,
         'face_confidence':        args.face_conf,
-        'min_face_size':          60,
+        'min_face_size':          args.min_face_size,
         'max_age':                args.max_age,
         'n_init':                 2,
         'max_iou_distance':       0.75,

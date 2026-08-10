@@ -53,8 +53,8 @@ except ImportError:
 # ── Face validity (mirrors face_detector constants) ───────────────────────────
 _FACE_ASPECT_MIN = 0.35
 _FACE_ASPECT_MAX = 2.20
-_FACE_MIN_AREA   = 1600    # 40×40 px²
-_FACE_MAX_AREA   = 0.45    # fraction of frame
+_FACE_MIN_AREA   = 900     # 30×30 px² — MUST match face_detector._FACE_MIN_AREA
+_FACE_MAX_AREA   = 0.50    # fraction of frame — MUST match face_detector._FACE_MAX_FRAC
 
 
 def is_face_bbox(tlwh, fw, fh):

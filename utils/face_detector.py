@@ -684,7 +684,7 @@ _COLOURS = {
     'fake':      (40,   40, 220),
     'analysing': (130, 130, 130),
 }
-_MIN_FRAMES_FOR_VERDICT = 8   # must match deep_sort._MIN_FRAMES
+_MIN_FRAMES_FOR_VERDICT = 3   # must match TemporalAggregator warm-up (n < 3 = "Analyzing...")
 
 
 def draw_results(frame: np.ndarray, tracks) -> np.ndarray:
