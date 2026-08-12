@@ -555,7 +555,9 @@ function render(s) {
           ? '<span class="vtag fake">⚠ Deepfake</span>'
           : (p.frames_analyzed||0) < 3
             ? '<span class="vtag wait">Analyzing</span>'
-            : '<span class="vtag real">✓ Real</span>';
+            : p.is_uncertain
+              ? '<span class="vtag wait">? Uncertain</span>'
+              : '<span class="vtag real">✓ Real</span>';
         return `<div class="tr2">
           <span class="tid">ID-${p.id}</span>
           <div class="mini">${bars}</div>

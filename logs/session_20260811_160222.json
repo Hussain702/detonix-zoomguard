@@ -1,0 +1,819 @@
+{
+  "session_id": "20260811_160222",
+  "start_time": "2026-08-11T16:02:22.496419",
+  "end_time": "2026-08-11T16:05:59.642885",
+  "total_detections": 281,
+  "total_alerts": 1,
+  "alerts": [
+    {
+      "timestamp": "2026-08-11T16:02:46.992137",
+      "type": "DEEPFAKE_DETECTED",
+      "track_id": 1,
+      "score": 0.9884,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "frame": 36
+    }
+  ],
+  "detections": [
+    {
+      "timestamp": "2026-08-11T16:04:41.373371",
+      "frame": 546,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8498
+    },
+    {
+      "timestamp": "2026-08-11T16:04:41.967502",
+      "frame": 549,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8044
+    },
+    {
+      "timestamp": "2026-08-11T16:04:42.567468",
+      "frame": 552,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.846
+    },
+    {
+      "timestamp": "2026-08-11T16:04:43.262619",
+      "frame": 555,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8035
+    },
+    {
+      "timestamp": "2026-08-11T16:04:43.912048",
+      "frame": 558,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8425
+    },
+    {
+      "timestamp": "2026-08-11T16:04:44.562635",
+      "frame": 561,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8733
+    },
+    {
+      "timestamp": "2026-08-11T16:04:45.218193",
+      "frame": 564,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7936
+    },
+    {
+      "timestamp": "2026-08-11T16:04:45.880089",
+      "frame": 567,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7229
+    },
+    {
+      "timestamp": "2026-08-11T16:04:46.488180",
+      "frame": 570,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6819
+    },
+    {
+      "timestamp": "2026-08-11T16:04:47.122871",
+      "frame": 573,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7492
+    },
+    {
+      "timestamp": "2026-08-11T16:04:47.792972",
+      "frame": 576,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8026
+    },
+    {
+      "timestamp": "2026-08-11T16:04:48.497997",
+      "frame": 579,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8295
+    },
+    {
+      "timestamp": "2026-08-11T16:04:49.150999",
+      "frame": 582,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8662
+    },
+    {
+      "timestamp": "2026-08-11T16:04:49.797292",
+      "frame": 585,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8848
+    },
+    {
+      "timestamp": "2026-08-11T16:04:50.451431",
+      "frame": 588,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7399
+    },
+    {
+      "timestamp": "2026-08-11T16:04:51.154970",
+      "frame": 591,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7637
+    },
+    {
+      "timestamp": "2026-08-11T16:04:51.900401",
+      "frame": 594,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8116
+    },
+    {
+      "timestamp": "2026-08-11T16:04:52.628880",
+      "frame": 597,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8517
+    },
+    {
+      "timestamp": "2026-08-11T16:04:53.364689",
+      "frame": 600,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.879
+    },
+    {
+      "timestamp": "2026-08-11T16:04:54.095058",
+      "frame": 603,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8813
+    },
+    {
+      "timestamp": "2026-08-11T16:04:54.788671",
+      "frame": 606,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9062
+    },
+    {
+      "timestamp": "2026-08-11T16:04:55.643969",
+      "frame": 609,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9257
+    },
+    {
+      "timestamp": "2026-08-11T16:04:56.433301",
+      "frame": 612,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8755
+    },
+    {
+      "timestamp": "2026-08-11T16:04:57.136192",
+      "frame": 615,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8968
+    },
+    {
+      "timestamp": "2026-08-11T16:04:57.842851",
+      "frame": 618,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9166
+    },
+    {
+      "timestamp": "2026-08-11T16:04:58.548202",
+      "frame": 621,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9189
+    },
+    {
+      "timestamp": "2026-08-11T16:04:59.257250",
+      "frame": 624,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8966
+    },
+    {
+      "timestamp": "2026-08-11T16:04:59.964489",
+      "frame": 627,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7114
+    },
+    {
+      "timestamp": "2026-08-11T16:05:00.681323",
+      "frame": 630,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6718
+    },
+    {
+      "timestamp": "2026-08-11T16:05:01.412326",
+      "frame": 633,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7405
+    },
+    {
+      "timestamp": "2026-08-11T16:05:02.118748",
+      "frame": 636,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7963
+    },
+    {
+      "timestamp": "2026-08-11T16:05:02.817653",
+      "frame": 639,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8393
+    },
+    {
+      "timestamp": "2026-08-11T16:05:03.507886",
+      "frame": 642,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8726
+    },
+    {
+      "timestamp": "2026-08-11T16:05:04.214424",
+      "frame": 645,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9005
+    },
+    {
+      "timestamp": "2026-08-11T16:05:04.913196",
+      "frame": 648,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9134
+    },
+    {
+      "timestamp": "2026-08-11T16:05:05.664003",
+      "frame": 651,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9318
+    },
+    {
+      "timestamp": "2026-08-11T16:05:06.479158",
+      "frame": 654,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9391
+    },
+    {
+      "timestamp": "2026-08-11T16:05:07.250004",
+      "frame": 657,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9432
+    },
+    {
+      "timestamp": "2026-08-11T16:05:08.151885",
+      "frame": 660,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9329
+    },
+    {
+      "timestamp": "2026-08-11T16:05:09.046426",
+      "frame": 663,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9433
+    },
+    {
+      "timestamp": "2026-08-11T16:05:09.808923",
+      "frame": 666,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9304
+    },
+    {
+      "timestamp": "2026-08-11T16:05:10.867475",
+      "frame": 669,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9261
+    },
+    {
+      "timestamp": "2026-08-11T16:05:11.663990",
+      "frame": 672,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9347
+    },
+    {
+      "timestamp": "2026-08-11T16:05:12.514425",
+      "frame": 675,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7262
+    },
+    {
+      "timestamp": "2026-08-11T16:05:13.253404",
+      "frame": 678,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7833
+    },
+    {
+      "timestamp": "2026-08-11T16:05:13.990213",
+      "frame": 681,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8031
+    },
+    {
+      "timestamp": "2026-08-11T16:05:14.717409",
+      "frame": 684,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8261
+    },
+    {
+      "timestamp": "2026-08-11T16:05:15.449561",
+      "frame": 687,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7971
+    },
+    {
+      "timestamp": "2026-08-11T16:05:16.163701",
+      "frame": 690,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8319
+    },
+    {
+      "timestamp": "2026-08-11T16:05:16.906919",
+      "frame": 693,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6997
+    },
+    {
+      "timestamp": "2026-08-11T16:05:17.670196",
+      "frame": 696,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7637
+    },
+    {
+      "timestamp": "2026-08-11T16:05:18.388140",
+      "frame": 699,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8136
+    },
+    {
+      "timestamp": "2026-08-11T16:05:19.084257",
+      "frame": 702,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.852
+    },
+    {
+      "timestamp": "2026-08-11T16:05:19.789364",
+      "frame": 705,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8838
+    },
+    {
+      "timestamp": "2026-08-11T16:05:20.506207",
+      "frame": 708,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9088
+    },
+    {
+      "timestamp": "2026-08-11T16:05:21.217787",
+      "frame": 711,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.926
+    },
+    {
+      "timestamp": "2026-08-11T16:05:21.957960",
+      "frame": 714,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9361
+    },
+    {
+      "timestamp": "2026-08-11T16:05:22.692680",
+      "frame": 717,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9307
+    },
+    {
+      "timestamp": "2026-08-11T16:05:23.409776",
+      "frame": 720,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9233
+    },
+    {
+      "timestamp": "2026-08-11T16:05:24.180982",
+      "frame": 723,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7842
+    },
+    {
+      "timestamp": "2026-08-11T16:05:24.912689",
+      "frame": 726,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8309
+    },
+    {
+      "timestamp": "2026-08-11T16:05:25.612916",
+      "frame": 729,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8645
+    },
+    {
+      "timestamp": "2026-08-11T16:05:26.321162",
+      "frame": 732,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8738
+    },
+    {
+      "timestamp": "2026-08-11T16:05:27.029596",
+      "frame": 735,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8925
+    },
+    {
+      "timestamp": "2026-08-11T16:05:27.769952",
+      "frame": 738,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8888
+    },
+    {
+      "timestamp": "2026-08-11T16:05:28.657072",
+      "frame": 741,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8686
+    },
+    {
+      "timestamp": "2026-08-11T16:05:29.429420",
+      "frame": 744,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8681
+    },
+    {
+      "timestamp": "2026-08-11T16:05:30.490630",
+      "frame": 747,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8505
+    },
+    {
+      "timestamp": "2026-08-11T16:05:32.090095",
+      "frame": 750,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8497
+    },
+    {
+      "timestamp": "2026-08-11T16:05:33.088012",
+      "frame": 753,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8405
+    },
+    {
+      "timestamp": "2026-08-11T16:05:33.913052",
+      "frame": 756,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8329
+    },
+    {
+      "timestamp": "2026-08-11T16:05:34.756797",
+      "frame": 759,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6772
+    },
+    {
+      "timestamp": "2026-08-11T16:05:35.736700",
+      "frame": 762,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7458
+    },
+    {
+      "timestamp": "2026-08-11T16:05:36.622357",
+      "frame": 765,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8001
+    },
+    {
+      "timestamp": "2026-08-11T16:05:37.665762",
+      "frame": 768,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8416
+    },
+    {
+      "timestamp": "2026-08-11T16:05:38.646529",
+      "frame": 771,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8751
+    },
+    {
+      "timestamp": "2026-08-11T16:05:39.461351",
+      "frame": 774,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8998
+    },
+    {
+      "timestamp": "2026-08-11T16:05:40.745413",
+      "frame": 777,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9093
+    },
+    {
+      "timestamp": "2026-08-11T16:05:41.609087",
+      "frame": 780,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8706
+    },
+    {
+      "timestamp": "2026-08-11T16:05:42.452261",
+      "frame": 783,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8341
+    },
+    {
+      "timestamp": "2026-08-11T16:05:43.267974",
+      "frame": 786,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7776
+    },
+    {
+      "timestamp": "2026-08-11T16:05:44.112962",
+      "frame": 789,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6896
+    },
+    {
+      "timestamp": "2026-08-11T16:05:45.008293",
+      "frame": 792,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7512
+    },
+    {
+      "timestamp": "2026-08-11T16:05:45.815655",
+      "frame": 795,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7967
+    },
+    {
+      "timestamp": "2026-08-11T16:05:46.679524",
+      "frame": 798,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.825
+    },
+    {
+      "timestamp": "2026-08-11T16:05:47.631040",
+      "frame": 801,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8466
+    },
+    {
+      "timestamp": "2026-08-11T16:05:48.533239",
+      "frame": 804,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7992
+    },
+    {
+      "timestamp": "2026-08-11T16:05:49.376856",
+      "frame": 807,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7566
+    },
+    {
+      "timestamp": "2026-08-11T16:05:50.130249",
+      "frame": 810,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7728
+    },
+    {
+      "timestamp": "2026-08-11T16:05:50.933394",
+      "frame": 813,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7859
+    },
+    {
+      "timestamp": "2026-08-11T16:05:51.701699",
+      "frame": 816,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7593
+    },
+    {
+      "timestamp": "2026-08-11T16:05:52.494000",
+      "frame": 819,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7599
+    },
+    {
+      "timestamp": "2026-08-11T16:05:53.343347",
+      "frame": 822,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7903
+    },
+    {
+      "timestamp": "2026-08-11T16:05:54.099137",
+      "frame": 825,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7949
+    },
+    {
+      "timestamp": "2026-08-11T16:05:54.868380",
+      "frame": 828,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7996
+    },
+    {
+      "timestamp": "2026-08-11T16:05:55.636595",
+      "frame": 831,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.835
+    },
+    {
+      "timestamp": "2026-08-11T16:05:56.439474",
+      "frame": 834,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.7146
+    },
+    {
+      "timestamp": "2026-08-11T16:05:57.196673",
+      "frame": 837,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6314
+    },
+    {
+      "timestamp": "2026-08-11T16:05:57.977142",
+      "frame": 840,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.6771
+    },
+    {
+      "timestamp": "2026-08-11T16:05:58.810074",
+      "frame": 843,
+      "video": "input_videos\\06__outside_talking_still_laughing.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.74
+    }
+  ]
+}

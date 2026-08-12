@@ -399,6 +399,10 @@ class DeepSortTracker:
         self._n_init     = n_init
         self._max_age    = max_age
         self._max_iou    = max_iou_distance
+        # Preserves each person's TemporalAggregator (EMA/history/verdict state)
+        # across a track being deleted and later resurrected via Re-ID, so a
+        # brief detection flicker doesn't silently reset their classification.
+        self._agg_store  = {}
 
     def predict(self):
         for t in self.tracks:
@@ -432,6 +436,8 @@ class DeepSortTracker:
                 mean, cov = self.kf.initiate(det.to_xyah())
                 t = Track(mean, cov, existing,
                           n_init=self._n_init, max_age=self._max_age)
+                if existing in self._agg_store:
+                    t._temporal = self._agg_store.pop(existing)
                 if det.embedding is not None:
                     t.embedding = det.embedding.copy()
                     src = _global_reid._store.get(existing)
@@ -452,6 +458,9 @@ class DeepSortTracker:
             self.tracks.append(t)
             self.next_id += 1
 
+        for t in self.tracks:
+            if t.is_deleted():
+                self._agg_store[t.track_id] = t._temporal
         self.tracks = [t for t in self.tracks if not t.is_deleted()]
         for t in self.tracks:
             if t.is_confirmed() and t.embedding is not None:
@@ -470,8 +479,9 @@ class DeepSortTracker:
         """Call between unrelated video clips to prevent ID bleed."""
         global _global_reid
         _global_reid = GlobalReIDGallery()
-        self.tracks  = []
-        self.next_id = 1
+        self.tracks     = []
+        self.next_id    = 1
+        self._agg_store = {}
 
     def reset(self):
         self.reset_reid()

@@ -113,7 +113,9 @@ class TemporalAggregator:
     #   Frames in the rolling stability window (~2 seconds at 30fps/skip=3).
     #
     FAKE_RAW_THR      = 0.90
-    STABILITY_STD     = 0.12
+    STABILITY_STD     = 0.20   # raised from 0.12 — real-world compressed video
+                                # naturally fluctuates more frame-to-frame than
+                                # the synthetic validation seeds assumed
     SIGNAL_NOISE_THR  = 0.15
     STABILITY_WINDOW  = 20
 
@@ -156,11 +158,22 @@ class TemporalAggregator:
                             f"FAKE_RAW_THR adjusted from validation: "
                             f"{new_thr:.4f} (FPR<={target_fpr:.0%})"
                         )
-        return cls._info()
+        # Informational only — median calibrated-real score, reported back to
+        # calibrate.py as 'real_thr' for its sanity-check printout. Decisions
+        # never use this value; the REAL gate is w_p95/w_std/frames_below.
+        real_thr = 0.5
+        real_mask = labels == 0
+        if real_mask.any():
+            real_probs = np.clip(probs[real_mask], 1e-7, 1 - 1e-7)
+            cal_real   = np.array([cls._scaler.scale(p) for p in real_probs])
+            real_thr   = float(np.median(cal_real))
+        return cls._info(real_thr)
 
     @classmethod
-    def load_calibration(cls, T: float, fake_raw_thr: float = None):
-        """Restore calibration from a previously saved run."""
+    def load_calibration(cls, T: float, fake_raw_thr: float = None, real_thr: float = None):
+        """Restore calibration from a previously saved run. real_thr is accepted
+        for symmetry with fit_from_validation's output but is informational
+        only — it is not used in any decision gate."""
         cls._scaler.T = float(T)
         if fake_raw_thr is not None and 0.70 <= fake_raw_thr <= 0.97:
             cls.FAKE_RAW_THR = float(fake_raw_thr)
@@ -174,10 +187,12 @@ class TemporalAggregator:
         return cls._info()
 
     @classmethod
-    def _info(cls) -> dict:
+    def _info(cls, real_thr: float = 0.5) -> dict:
         return {
             'T':             cls._scaler.T,
             'fake_raw_thr':  cls.FAKE_RAW_THR,
+            'fake_thr':      cls.FAKE_RAW_THR,   # alias — calibrate.py/main.py key
+            'real_thr':      real_thr,
             'stability_std': cls.STABILITY_STD,
             'ema_alpha':     cls.EMA_ALPHA,
         }
@@ -225,6 +240,9 @@ class TemporalAggregator:
         w      = np.asarray(self._history, dtype=np.float32)
         w_std  = float(np.std(w))  if len(w) > 1 else 0.0
         w_max  = float(np.max(w))
+        # p95 is used for the REAL gate so a single transient noise spike
+        # doesn't lock the window out of REAL for its full duration.
+        w_p95  = float(np.percentile(w, 95)) if len(w) > 1 else w_max
 
         # Confidence from window std — vectorised
         self._confidence = float(np.clip(1.0 - w_std * 2.0, 0.20, 1.0))
@@ -238,11 +256,11 @@ class TemporalAggregator:
             self._frames_below += 1
             self._frames_above  = 0
 
-        self._decide(thr, w_std, w_max)
+        self._decide(thr, w_std, w_max, w_p95)
 
     # ── Decision logic ────────────────────────────────────────────────────────
 
-    def _decide(self, thr: float, w_std: float, w_max: float):
+    def _decide(self, thr: float, w_std: float, w_max: float, w_p95: float):
         n   = self._obs
         ema = self._ema
 
@@ -304,14 +322,16 @@ class TemporalAggregator:
 
         # ── REAL gate ─────────────────────────────────────────────────────────
         # Conditions:
-        #   (a) window max < thr      — no score in window reached fake zone
-        #   (b) w_std < STABILITY_STD — scores are consistent (not jumping)
+        #   (a) window p95 < thr     — window isn't *consistently* touching
+        #                               the fake zone (one single-frame spike
+        #                               no longer blocks REAL for 20 frames)
+        #   (b) w_std < STABILITY_STD — scores are reasonably consistent
         #   (c) enough frames below   — not just a momentary dip
         #
         # Deliberately NO lower bound on EMA — compressed real video can have
         # EMA anywhere from 0.20 to 0.89; what matters is that it never
-        # crossed the fake threshold and stays consistent.
-        if (w_max < thr
+        # sustains near the fake threshold and stays reasonably consistent.
+        if (w_p95 < thr
                 and w_std < self.STABILITY_STD
                 and self._frames_below >= self.MIN_FRAMES_REAL):
             self._is_deepfake      = False

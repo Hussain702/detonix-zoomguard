@@ -1,0 +1,819 @@
+{
+  "session_id": "20260812_160124",
+  "start_time": "2026-08-12T16:01:24.426423",
+  "end_time": "2026-08-12T16:05:40.672740",
+  "total_detections": 330,
+  "total_alerts": 1,
+  "alerts": [
+    {
+      "timestamp": "2026-08-12T16:01:43.751088",
+      "type": "DEEPFAKE_DETECTED",
+      "track_id": 1,
+      "score": 0.9922,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "frame": 36
+    }
+  ],
+  "detections": [
+    {
+      "timestamp": "2026-08-12T16:04:26.979478",
+      "frame": 693,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6165
+    },
+    {
+      "timestamp": "2026-08-12T16:04:27.715396",
+      "frame": 696,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6257
+    },
+    {
+      "timestamp": "2026-08-12T16:04:28.442052",
+      "frame": 699,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.604
+    },
+    {
+      "timestamp": "2026-08-12T16:04:29.189359",
+      "frame": 702,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5047
+    },
+    {
+      "timestamp": "2026-08-12T16:04:29.944500",
+      "frame": 705,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4732
+    },
+    {
+      "timestamp": "2026-08-12T16:04:30.663932",
+      "frame": 708,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5851
+    },
+    {
+      "timestamp": "2026-08-12T16:04:31.397976",
+      "frame": 711,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5572
+    },
+    {
+      "timestamp": "2026-08-12T16:04:32.133322",
+      "frame": 714,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.654
+    },
+    {
+      "timestamp": "2026-08-12T16:04:32.876326",
+      "frame": 717,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6759
+    },
+    {
+      "timestamp": "2026-08-12T16:04:33.600996",
+      "frame": 720,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5762
+    },
+    {
+      "timestamp": "2026-08-12T16:04:34.399281",
+      "frame": 723,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6153
+    },
+    {
+      "timestamp": "2026-08-12T16:04:35.121943",
+      "frame": 726,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6701
+    },
+    {
+      "timestamp": "2026-08-12T16:04:35.854452",
+      "frame": 729,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6706
+    },
+    {
+      "timestamp": "2026-08-12T16:04:36.580626",
+      "frame": 732,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6968
+    },
+    {
+      "timestamp": "2026-08-12T16:04:37.318626",
+      "frame": 735,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5766
+    },
+    {
+      "timestamp": "2026-08-12T16:04:38.046847",
+      "frame": 738,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5662
+    },
+    {
+      "timestamp": "2026-08-12T16:04:38.773101",
+      "frame": 741,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.538
+    },
+    {
+      "timestamp": "2026-08-12T16:04:39.489134",
+      "frame": 744,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5742
+    },
+    {
+      "timestamp": "2026-08-12T16:04:40.211852",
+      "frame": 747,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5923
+    },
+    {
+      "timestamp": "2026-08-12T16:04:40.949338",
+      "frame": 750,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5364
+    },
+    {
+      "timestamp": "2026-08-12T16:04:41.690483",
+      "frame": 753,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5522
+    },
+    {
+      "timestamp": "2026-08-12T16:04:42.408412",
+      "frame": 756,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5983
+    },
+    {
+      "timestamp": "2026-08-12T16:04:43.135092",
+      "frame": 759,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6598
+    },
+    {
+      "timestamp": "2026-08-12T16:04:43.980897",
+      "frame": 762,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6694
+    },
+    {
+      "timestamp": "2026-08-12T16:04:44.776966",
+      "frame": 765,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6481
+    },
+    {
+      "timestamp": "2026-08-12T16:04:45.580952",
+      "frame": 768,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.559
+    },
+    {
+      "timestamp": "2026-08-12T16:04:46.344618",
+      "frame": 771,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6392
+    },
+    {
+      "timestamp": "2026-08-12T16:04:47.084474",
+      "frame": 774,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6913
+    },
+    {
+      "timestamp": "2026-08-12T16:04:47.820825",
+      "frame": 777,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7004
+    },
+    {
+      "timestamp": "2026-08-12T16:04:48.559972",
+      "frame": 780,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7318
+    },
+    {
+      "timestamp": "2026-08-12T16:04:49.290956",
+      "frame": 783,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6573
+    },
+    {
+      "timestamp": "2026-08-12T16:04:50.022919",
+      "frame": 786,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5517
+    },
+    {
+      "timestamp": "2026-08-12T16:04:50.741230",
+      "frame": 789,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5827
+    },
+    {
+      "timestamp": "2026-08-12T16:04:51.460878",
+      "frame": 792,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.621
+    },
+    {
+      "timestamp": "2026-08-12T16:04:52.200774",
+      "frame": 795,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6701
+    },
+    {
+      "timestamp": "2026-08-12T16:04:52.973158",
+      "frame": 798,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7047
+    },
+    {
+      "timestamp": "2026-08-12T16:04:53.736683",
+      "frame": 801,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.7459
+    },
+    {
+      "timestamp": "2026-08-12T16:04:54.559133",
+      "frame": 804,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6232
+    },
+    {
+      "timestamp": "2026-08-12T16:04:55.364508",
+      "frame": 807,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5615
+    },
+    {
+      "timestamp": "2026-08-12T16:04:56.213851",
+      "frame": 810,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5838
+    },
+    {
+      "timestamp": "2026-08-12T16:04:57.319179",
+      "frame": 813,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6517
+    },
+    {
+      "timestamp": "2026-08-12T16:04:58.267306",
+      "frame": 816,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6215
+    },
+    {
+      "timestamp": "2026-08-12T16:04:59.126768",
+      "frame": 819,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.491
+    },
+    {
+      "timestamp": "2026-08-12T16:04:59.922378",
+      "frame": 822,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5096
+    },
+    {
+      "timestamp": "2026-08-12T16:05:00.659805",
+      "frame": 825,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5545
+    },
+    {
+      "timestamp": "2026-08-12T16:05:01.423475",
+      "frame": 828,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5272
+    },
+    {
+      "timestamp": "2026-08-12T16:05:02.192380",
+      "frame": 831,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4836
+    },
+    {
+      "timestamp": "2026-08-12T16:05:02.951489",
+      "frame": 834,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4227
+    },
+    {
+      "timestamp": "2026-08-12T16:05:03.734809",
+      "frame": 837,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4143
+    },
+    {
+      "timestamp": "2026-08-12T16:05:04.480366",
+      "frame": 840,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4411
+    },
+    {
+      "timestamp": "2026-08-12T16:05:05.222692",
+      "frame": 843,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3454
+    },
+    {
+      "timestamp": "2026-08-12T16:05:06.007156",
+      "frame": 846,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4073
+    },
+    {
+      "timestamp": "2026-08-12T16:05:06.765417",
+      "frame": 849,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3624
+    },
+    {
+      "timestamp": "2026-08-12T16:05:07.503513",
+      "frame": 852,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.356
+    },
+    {
+      "timestamp": "2026-08-12T16:05:08.230380",
+      "frame": 855,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4341
+    },
+    {
+      "timestamp": "2026-08-12T16:05:08.974506",
+      "frame": 858,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4711
+    },
+    {
+      "timestamp": "2026-08-12T16:05:09.728564",
+      "frame": 861,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.503
+    },
+    {
+      "timestamp": "2026-08-12T16:05:10.472560",
+      "frame": 864,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4887
+    },
+    {
+      "timestamp": "2026-08-12T16:05:11.203303",
+      "frame": 867,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4779
+    },
+    {
+      "timestamp": "2026-08-12T16:05:11.956991",
+      "frame": 870,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5097
+    },
+    {
+      "timestamp": "2026-08-12T16:05:12.669651",
+      "frame": 873,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5521
+    },
+    {
+      "timestamp": "2026-08-12T16:05:13.505801",
+      "frame": 876,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5506
+    },
+    {
+      "timestamp": "2026-08-12T16:05:14.282231",
+      "frame": 879,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4808
+    },
+    {
+      "timestamp": "2026-08-12T16:05:15.019663",
+      "frame": 882,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4587
+    },
+    {
+      "timestamp": "2026-08-12T16:05:15.799105",
+      "frame": 885,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4019
+    },
+    {
+      "timestamp": "2026-08-12T16:05:16.519840",
+      "frame": 888,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4899
+    },
+    {
+      "timestamp": "2026-08-12T16:05:17.246317",
+      "frame": 891,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5596
+    },
+    {
+      "timestamp": "2026-08-12T16:05:17.939960",
+      "frame": 894,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5848
+    },
+    {
+      "timestamp": "2026-08-12T16:05:18.626139",
+      "frame": 897,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6347
+    },
+    {
+      "timestamp": "2026-08-12T16:05:19.300737",
+      "frame": 900,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.6352
+    },
+    {
+      "timestamp": "2026-08-12T16:05:19.988697",
+      "frame": 903,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5506
+    },
+    {
+      "timestamp": "2026-08-12T16:05:20.681657",
+      "frame": 906,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.578
+    },
+    {
+      "timestamp": "2026-08-12T16:05:21.363843",
+      "frame": 909,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4603
+    },
+    {
+      "timestamp": "2026-08-12T16:05:22.038996",
+      "frame": 912,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5508
+    },
+    {
+      "timestamp": "2026-08-12T16:05:22.759198",
+      "frame": 915,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5346
+    },
+    {
+      "timestamp": "2026-08-12T16:05:23.453106",
+      "frame": 918,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4847
+    },
+    {
+      "timestamp": "2026-08-12T16:05:24.139041",
+      "frame": 921,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5498
+    },
+    {
+      "timestamp": "2026-08-12T16:05:24.823481",
+      "frame": 924,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4976
+    },
+    {
+      "timestamp": "2026-08-12T16:05:25.513127",
+      "frame": 927,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4818
+    },
+    {
+      "timestamp": "2026-08-12T16:05:26.193392",
+      "frame": 930,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.432
+    },
+    {
+      "timestamp": "2026-08-12T16:05:26.874977",
+      "frame": 933,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3847
+    },
+    {
+      "timestamp": "2026-08-12T16:05:27.592608",
+      "frame": 936,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5001
+    },
+    {
+      "timestamp": "2026-08-12T16:05:28.288529",
+      "frame": 939,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4753
+    },
+    {
+      "timestamp": "2026-08-12T16:05:28.999897",
+      "frame": 942,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5666
+    },
+    {
+      "timestamp": "2026-08-12T16:05:29.674993",
+      "frame": 945,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5018
+    },
+    {
+      "timestamp": "2026-08-12T16:05:30.364311",
+      "frame": 948,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4741
+    },
+    {
+      "timestamp": "2026-08-12T16:05:31.053287",
+      "frame": 951,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3834
+    },
+    {
+      "timestamp": "2026-08-12T16:05:31.724171",
+      "frame": 954,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5134
+    },
+    {
+      "timestamp": "2026-08-12T16:05:32.419437",
+      "frame": 957,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4366
+    },
+    {
+      "timestamp": "2026-08-12T16:05:33.150993",
+      "frame": 960,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4139
+    },
+    {
+      "timestamp": "2026-08-12T16:05:33.961757",
+      "frame": 963,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4079
+    },
+    {
+      "timestamp": "2026-08-12T16:05:34.691853",
+      "frame": 966,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4459
+    },
+    {
+      "timestamp": "2026-08-12T16:05:35.447673",
+      "frame": 969,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5064
+    },
+    {
+      "timestamp": "2026-08-12T16:05:36.170150",
+      "frame": 972,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.5436
+    },
+    {
+      "timestamp": "2026-08-12T16:05:36.897040",
+      "frame": 975,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4774
+    },
+    {
+      "timestamp": "2026-08-12T16:05:37.625582",
+      "frame": 978,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.4498
+    },
+    {
+      "timestamp": "2026-08-12T16:05:38.346544",
+      "frame": 981,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3849
+    },
+    {
+      "timestamp": "2026-08-12T16:05:39.057986",
+      "frame": 984,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.413
+    },
+    {
+      "timestamp": "2026-08-12T16:05:39.758953",
+      "frame": 987,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.405
+    },
+    {
+      "timestamp": "2026-08-12T16:05:40.456482",
+      "frame": 990,
+      "video": "input_videos\\02__talking_against_wall.mp4",
+      "track_id": 1,
+      "is_deepfake": false,
+      "score": 0.3682
+    }
+  ]
+}

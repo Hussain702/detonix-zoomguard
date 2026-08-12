@@ -20,14 +20,11 @@ import time
 from datetime import datetime
 
 from utils.deep_sort import DeepSortTracker, Detection
-from utils.face_detector import FaceDetector, draw_results
+from utils.face_detector import FaceDetector, draw_results, _MIN_FRAMES_FOR_VERDICT
 from utils.deepfake_model import DeepfakeDetector
 from utils.logger import SessionLogger
 
 logger = logging.getLogger(__name__)
-
-# Must match deep_sort._MIN_FRAMES
-_MIN_FRAMES_FOR_VERDICT = 8
 
 
 def _push(event_type, data):

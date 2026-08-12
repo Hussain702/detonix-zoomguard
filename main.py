@@ -25,7 +25,7 @@ from utils.temporal_classifier import TemporalAggregator
 
 try:
     d = json.load(open('calibration.json'))
-    TemporalAggregator.load_calibration(d['T'], d['fake_thr'], d['real_thr'])
+    TemporalAggregator.load_calibration(d['T'], d['fake_thr'], d.get('real_thr'))
     print(f"Calibration loaded: T={d['T']:.3f}  fake_thr={d['fake_thr']:.3f}")
 except FileNotFoundError:
     print("No calibration.json — using defaults (T=1.8).")

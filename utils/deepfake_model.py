@@ -143,8 +143,7 @@ class DeepfakeDetector:
         logger.info(f"Using device: {self.device}")
 
         self.transform = transforms.Compose([
-            transforms.Resize((160, 160)),   # pre-resize for CPU speed
-            transforms.Resize((299, 299)),   # required input size
+            transforms.Resize((299, 299), interpolation=transforms.InterpolationMode.BICUBIC),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.5, 0.5, 0.5],
                                  std=[0.5, 0.5, 0.5])
