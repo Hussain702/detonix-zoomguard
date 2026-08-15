@@ -183,6 +183,40 @@ class TemporalAggregator:
         )
 
     @classmethod
+    def set_threshold(cls, thr: float, source: str = "cli"):
+        """
+        Explicitly override the production FAKE decision threshold
+        (raw XceptionNet probability space).
+
+        This is the ONLY supported way to change the live decision boundary
+        at runtime — it writes directly to the same class attribute
+        (FAKE_RAW_THR) that load_calibration() and fit_from_validation()
+        write to, and that _decide() reads from. There is exactly one
+        threshold; this just lets an operator set it explicitly (e.g. via
+        main.py's --threshold flag) instead of only via calibration.json.
+
+        Bounds match load_calibration()'s sanity range so a mistyped CLI
+        value can't silently disable the classifier.
+        """
+        thr = float(thr)
+        if not (0.70 <= thr <= 0.97):
+            raise ValueError(
+                f"--threshold must be in [0.70, 0.97] (raw XceptionNet "
+                f"probability space), got {thr}")
+        cls.FAKE_RAW_THR = thr
+        logger.info(f"FAKE_RAW_THR overridden via {source}: {thr:.4f}")
+
+    @classmethod
+    def display_threshold(cls) -> float:
+        """
+        FAKE_RAW_THR mapped through the same temperature scaler used for
+        smoothed_score, so UI code that plots/colours against smoothed_score
+        (a calibrated display value) compares like-for-like instead of
+        mixing raw-space and calibrated-space numbers.
+        """
+        return cls._scaler.scale(cls.FAKE_RAW_THR)
+
+    @classmethod
     def get_calibration_info(cls) -> dict:
         return cls._info()
 

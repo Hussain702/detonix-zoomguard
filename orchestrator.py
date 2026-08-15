@@ -6,10 +6,24 @@ Fixes applied:
   (min_detection_confidence, min_face_size)
 ✔ tracker.update() called with frame_w / frame_h so the face-only gate works
 ✔ face_detector.detect() returns dicts → access via fd['bbox'] etc.
-✔ crop always present in the dict (face_detector guarantees it)
 ✔ draw_results / close() wired correctly
 ✔ Alert confidence threshold raised to 0.92 (avoid false alerts)
 ✔ HUD shows "analysing" count during warm-up, not UNCERTAIN
+✔ Classification crop now taken AFTER tracker.update(), from the Kalman-
+  smoothed track box (track.to_tlwh()) instead of the raw per-frame detector
+  box. Raw detector boxes jitter frame-to-frame (a few px of jitter shifts
+  the crop's framing), and XceptionNet's score turned out to be very
+  sensitive to that framing — this was causing the same real face to swing
+  between ~0.01 and ~0.99 raw fake-probability frame to frame. Cropping from
+  the smoothed box removes that jitter at the source, before it ever reaches
+  the classifier, instead of trying to smooth the resulting noisy scores
+  after the fact.
+✔ Classification is now applied directly to the tracks DeepSORT actually
+  matched this frame (track.time_since_update == 0), rather than
+  independently re-matching raw detections back to tracks via a second,
+  greedy IoU pass. The old greedy pass could occasionally disagree with
+  DeepSORT's own Hungarian assignment when two faces were close together,
+  scoring the wrong track.
 """
 
 import cv2
@@ -20,9 +34,12 @@ import time
 from datetime import datetime
 
 from utils.deep_sort import DeepSortTracker, Detection
-from utils.face_detector import FaceDetector, draw_results, _MIN_FRAMES_FOR_VERDICT
+from utils.face_detector import (
+    FaceDetector, draw_results, _MIN_FRAMES_FOR_VERDICT, _make_crop,
+)
 from utils.deepfake_model import DeepfakeDetector
 from utils.logger import SessionLogger
+from utils.temporal_classifier import TemporalAggregator
 
 logger = logging.getLogger(__name__)
 
@@ -33,18 +50,6 @@ def _push(event_type, data):
         push_event(event_type, data)
     except Exception:
         pass
-
-
-def _iou(box_a, box_b):
-    ax2 = box_a[0] + box_a[2];  ay2 = box_a[1] + box_a[3]
-    bx2 = box_b[0] + box_b[2];  by2 = box_b[1] + box_b[3]
-    ix1 = max(box_a[0], box_b[0]); iy1 = max(box_a[1], box_b[1])
-    ix2 = min(ax2, bx2);           iy2 = min(ay2, by2)
-    if ix2 <= ix1 or iy2 <= iy1:
-        return 0.0
-    inter = (ix2 - ix1) * (iy2 - iy1)
-    union = box_a[2] * box_a[3] + box_b[2] * box_b[3] - inter
-    return inter / union if union > 0 else 0.0
 
 
 class DetectionOrchestrator:
@@ -73,7 +78,12 @@ class DetectionOrchestrator:
             n_init=config.get('n_init', 3),
         )
 
-        self.deepfake_threshold = config.get('deepfake_threshold', 0.65)
+        # NOTE: this is reporting-only. The single source of truth for the
+        # actual FAKE decision boundary is TemporalAggregator.FAKE_RAW_THR —
+        # read live (not cached here) wherever it's reported, so it can
+        # never drift out of sync with the value the classifier is really
+        # using (config['deepfake_threshold'] previously fed a threshold
+        # into the dashboard that the decision logic never consulted).
         self.infer_every_n  = config.get('process_every_n_frames', 3)
         self.frame_count    = 0
         self.track_results  = {}
@@ -92,7 +102,13 @@ class DetectionOrchestrator:
             'total_frames': total_frames,
             'fps':          fps,
             'resolution':   resolution,
-            'threshold':    self.deepfake_threshold,
+            # Live values from the single source of truth, not a copy that
+            # can drift: 'threshold' is the actual raw-space FAKE gate the
+            # classifier is using right now; 'display_threshold' is the same
+            # boundary mapped into the calibrated space that smoothed_score
+            # (the value plotted per-frame) actually lives in.
+            'threshold':         TemporalAggregator.FAKE_RAW_THR,
+            'display_threshold': TemporalAggregator.display_threshold(),
         })
 
     def end_session(self):
@@ -122,24 +138,15 @@ class DetectionOrchestrator:
         raw_faces = self.face_detector.detect(small)
 
         face_detections = []
-        crops           = []
 
         for fd in raw_faces:
             bx, by, bw, bh = fd['bbox']
 
-            # Map back to original resolution and grab HQ crop
+            # Map back to original resolution (needed for the tracker itself,
+            # independent of anything to do with classification crops).
             if scale != 1.0:
                 bx = int(bx / scale);  by = int(by / scale)
                 bw = int(bw / scale);  bh = int(bh / scale)
-                pad = int(min(bw, bh) * 0.10)
-                x1  = max(0, bx - pad);           y1 = max(0, by - pad)
-                x2  = min(w_orig, bx + bw + pad); y2 = min(h_orig, by + bh + pad)
-                hq  = frame_bgr[y1:y2, x1:x2]
-                crop = (cv2.resize(hq, (224, 224))
-                        if hq.size > 0
-                        else np.zeros((224, 224, 3), dtype=np.uint8))
-            else:
-                crop = fd['crop']   # already 224×224 from face_detector
 
             det = Detection(
                 tlwh=[bx, by, bw, bh],
@@ -149,78 +156,93 @@ class DetectionOrchestrator:
                 frame_h=h_orig,
             )
             face_detections.append(det)
-            crops.append(crop)
 
-        # Step 3: Update tracker — pass frame dims so the face-only gate fires
+        # Step 3: Update tracker — pass frame dims so the face-only gate fires.
+        # After this call, every track's Kalman state (track.to_tlwh()) has
+        # fused in this frame's detection, so it's a smoothed box, not a raw
+        # jittery one.
         self.tracker.update(face_detections, frame_w=w_orig, frame_h=h_orig)
 
-        # Step 4: Deepfake inference every N frames
-        if crops and self.frame_count % self.infer_every_n == 0:
-            scores        = self.deepfake_detector.predict_batch(crops)
+        # Step 4: Deepfake inference every N frames.
+        # Crop directly from the tracks DeepSORT just matched this frame —
+        # using each track's smoothed box, not the raw detector box — instead
+        # of re-matching raw detections back to tracks after the fact.
+        if self.frame_count % self.infer_every_n == 0:
             active_tracks = self.tracker.get_active_tracks()
-            assigned      = set()
+            live_tracks   = [t for t in active_tracks if t.time_since_update == 0]
 
-            for det, score in zip(face_detections, scores):
-                best_track, best_iou = None, 0.1
-                for track in active_tracks:
-                    if track.track_id in assigned:
+            if live_tracks:
+                crops = []
+                for track in live_tracks:
+                    x, y, w, h = track.to_tlwh()
+                    x = max(0, int(x));  y = max(0, int(y))
+                    w = max(1, int(w));  h = max(1, int(h))
+                    crops.append(_make_crop(frame_bgr, x, y, w, h))
+
+                scores = self.deepfake_detector.predict_batch(crops)
+
+                for track, score in zip(live_tracks, scores):
+                    tid = track.track_id
+
+                    # A failed inference (score is None) must NEVER be
+                    # treated as evidence of REAL. Discard the observation
+                    # entirely rather than feeding a fabricated value into
+                    # the temporal aggregator — and log it clearly so
+                    # failures are visible, not silent.
+                    if score is None:
+                        logger.warning(
+                            "Deepfake inference failed for track %s at "
+                            "frame %s (%s) — observation discarded, not "
+                            "counted as REAL or FAKE evidence.",
+                            tid, frame_number, video_name)
                         continue
-                    iou_val = _iou(track.to_tlwh(), det.tlwh)
-                    if iou_val > best_iou:
-                        best_iou   = iou_val
-                        best_track = track
 
-                if best_track is None:
-                    continue
+                    track.add_deepfake_score(score)
+                    n_scores = len(track.deepfake_scores)
 
-                best_track.add_deepfake_score(score)
-                assigned.add(best_track.track_id)
-                tid      = best_track.track_id
-                n_scores = len(best_track.deepfake_scores)
+                    self.session_logger.log_detection(
+                        tid, track.is_deepfake,
+                        track.smoothed_score, frame_number, video_name)
 
-                self.session_logger.log_detection(
-                    tid, best_track.is_deepfake,
-                    best_track.smoothed_score, frame_number, video_name)
+                    if tid not in self.track_results:
+                        self.track_results[tid] = {
+                            'is_deepfake':     False,
+                            'is_uncertain':    True,
+                            'confidence':      0.0,
+                            'frames_analyzed': 0,
+                            'alerted':         False,
+                        }
 
-                if tid not in self.track_results:
-                    self.track_results[tid] = {
-                        'is_deepfake':     False,
-                        'is_uncertain':    True,
-                        'confidence':      0.0,
-                        'frames_analyzed': 0,
-                        'alerted':         False,
-                    }
+                    # Alert — only after enough frames, high confidence
+                    enough_data = n_scores >= _MIN_FRAMES_FOR_VERDICT
+                    if (enough_data
+                            and track.is_deepfake
+                            and not track.is_uncertain
+                            and track.confidence > 0.92
+                            and not self.track_results[tid]['alerted']):
+                        self.session_logger.log_alert(
+                            tid, track.confidence, video_name, frame_number)
+                        self.track_results[tid]['alerted'] = True
+                        _push('alert', {
+                            'id':    tid,
+                            'score': round(track.confidence, 4),
+                            'frame': frame_number,
+                            'video': os.path.basename(video_name),
+                        })
 
-                # Alert — only after enough frames, high confidence
-                enough_data = n_scores >= _MIN_FRAMES_FOR_VERDICT
-                if (enough_data
-                        and best_track.is_deepfake
-                        and not best_track.is_uncertain
-                        and best_track.confidence > 0.92
-                        and not self.track_results[tid]['alerted']):
-                    self.session_logger.log_alert(
-                        tid, best_track.confidence, video_name, frame_number)
-                    self.track_results[tid]['alerted'] = True
-                    _push('alert', {
-                        'id':    tid,
-                        'score': round(best_track.confidence, 4),
-                        'frame': frame_number,
-                        'video': os.path.basename(video_name),
+                    self.track_results[tid]['is_deepfake']      = track.is_deepfake
+                    self.track_results[tid]['is_uncertain']     = track.is_uncertain
+                    self.track_results[tid]['confidence']       = track.confidence
+                    self.track_results[tid]['frames_analyzed'] += 1
+
+                    _push('person_update', {
+                        'id':              tid,
+                        'score':           round(track.smoothed_score, 4),
+                        'confidence':      round(track.confidence, 4),
+                        'frames_analyzed': self.track_results[tid]['frames_analyzed'],
+                        'is_deepfake':     track.is_deepfake,
+                        'is_uncertain':    track.is_uncertain,
                     })
-
-                self.track_results[tid]['is_deepfake']      = best_track.is_deepfake
-                self.track_results[tid]['is_uncertain']     = best_track.is_uncertain
-                self.track_results[tid]['confidence']       = best_track.confidence
-                self.track_results[tid]['frames_analyzed'] += 1
-
-                _push('person_update', {
-                    'id':              tid,
-                    'score':           round(best_track.smoothed_score, 4),
-                    'confidence':      round(best_track.confidence, 4),
-                    'frames_analyzed': self.track_results[tid]['frames_analyzed'],
-                    'is_deepfake':     best_track.is_deepfake,
-                    'is_uncertain':    best_track.is_uncertain,
-                })
 
         # Step 5: FPS push
         if self.frame_count % 5 == 0:

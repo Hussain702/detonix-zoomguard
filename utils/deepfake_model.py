@@ -179,16 +179,27 @@ class DeepfakeDetector:
 
                 missing, unexpected = model.load_state_dict(new_sd, strict=False)
 
-                if missing:
-                    logger.warning(f"Missing keys ({len(missing)}): {missing[:3]}...")
-                if unexpected:
-                    logger.warning(f"Unexpected keys ({len(unexpected)}): {unexpected[:3]}...")
+                # strict=False lets a partially-matching checkpoint load
+                # silently, with only a warning logged, while the model runs
+                # with randomly-initialised weights for every missing layer.
+                # That is a live prediction-integrity hazard: it can produce
+                # confident-looking but meaningless deepfake scores with no
+                # hard failure anywhere. Refuse to run on a mismatch instead
+                # of degrading quietly — this raise is caught by the except
+                # below, which logs the reason and falls back to MobileNetV2
+                # (the existing, unchanged fallback path).
+                if missing or unexpected:
+                    raise RuntimeError(
+                        f"XceptionNet checkpoint/architecture mismatch: "
+                        f"{len(missing)} missing key(s), {len(unexpected)} "
+                        f"unexpected key(s). Refusing to run with a partially "
+                        f"-loaded model. Missing: {missing[:5]}  "
+                        f"Unexpected: {unexpected[:5]}"
+                    )
 
-                if not missing:
-                    logger.info("XceptionNet loaded successfully - FaceForensics++ weights active")
-                else:
-                    logger.warning("Partial load — some weights missing, accuracy may be reduced")
-
+                logger.info(
+                    "XceptionNet loaded successfully - FaceForensics++ "
+                    "weights active (0 missing, 0 unexpected keys)")
                 return model.to(self.device)
 
             except Exception as e:
@@ -212,7 +223,13 @@ class DeepfakeDetector:
     def predict(self, face_image):
         """
         Predict fake probability for a single face.
-        Returns float: 0.0 = definitely real, 1.0 = definitely fake
+        Returns float in [0.0, 1.0] (0.0 = definitely real, 1.0 = definitely
+        fake), or None if inference failed. None is a genuine sentinel for
+        "no valid observation" — 0.0 is a valid, common REAL-leaning model
+        output and must never be reused to mean "error", since that would
+        silently manufacture REAL evidence out of a failure. Callers MUST
+        check for None and discard the observation rather than feeding it
+        into the temporal aggregator.
         """
         try:
             if isinstance(face_image, np.ndarray):
@@ -234,10 +251,17 @@ class DeepfakeDetector:
 
         except Exception as e:
             logger.error(f"Prediction error: {e}")
-            return 0.0
+            return None
 
     def predict_batch(self, face_images):
-        """Predict fake probability for a list of face images (faster than one by one)."""
+        """
+        Predict fake probability for a list of face images (faster than one
+        by one). Returns a list the same length as face_images; each entry
+        is a float in [0.0, 1.0], or None where that image's inference or
+        preprocessing failed. See predict() docstring for why None (not 0.0)
+        is used as the failure sentinel — callers must filter None out
+        before using the result as evidence for REAL or FAKE.
+        """
         if not face_images:
             return []
 
@@ -257,16 +281,24 @@ class DeepfakeDetector:
                 logger.error(f"Transform error face {i}: {e}")
 
         if not tensors:
-            return [0.0] * len(face_images)
+            # Every image in the batch failed preprocessing — no valid
+            # observations at all, not "everyone is real".
+            return [None] * len(face_images)
 
-        batch = torch.stack(tensors).to(self.device)
+        try:
+            batch = torch.stack(tensors).to(self.device)
+            with torch.no_grad():
+                logits = self.model(batch)
+                probs  = torch.softmax(logits, dim=1)
+                fake_probs = probs[:, 1].cpu().numpy().tolist()
+        except Exception as e:
+            logger.error(f"Batch inference error: {e}")
+            return [None] * len(face_images)
 
-        with torch.no_grad():
-            logits = self.model(batch)
-            probs  = torch.softmax(logits, dim=1)
-            fake_probs = probs[:, 1].cpu().numpy().tolist()
-
-        results = [0.0] * len(face_images)
+        # Default every slot to None (failed/no observation); only the
+        # indices that actually produced a model output get a real score.
+        # Images that failed transform() above stay None, not 0.0.
+        results = [None] * len(face_images)
         for idx, orig_idx in enumerate(valid_idx):
             results[orig_idx] = fake_probs[idx]
 

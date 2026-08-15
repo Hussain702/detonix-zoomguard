@@ -34,7 +34,10 @@ _state = {
     "session_id": "",
     "video_name": "",
     "resolution": "",
-    "threshold": 0.65,
+    "threshold": 0.90,          # raw-space decision boundary (headline stat)
+    "display_threshold": 0.90,  # same boundary, calibrated space (for the
+                                 # per-frame sparkline, which plots p.score —
+                                 # a calibrated value, not a raw one)
     "persons": [],
     "alerts": [],
     "videos_done": 0,
@@ -55,7 +58,9 @@ def push_event(event_type, data):
                 "total_frames": data.get("total_frames", 0),
                 "fps": data.get("fps", 0),
                 "resolution": data.get("resolution", ""),
-                "threshold": data.get("threshold", 0.65),
+                "threshold": data.get("threshold", 0.90),
+                "display_threshold": data.get("display_threshold",
+                                               data.get("threshold", 0.90)),
                 "frame": 0,
                 "persons": [],
                 "alerts": [],
@@ -513,7 +518,7 @@ function render(s) {
   // session info
   document.getElementById('s-vids').textContent = s.videos_done || 0;
   document.getElementById('s-frm').textContent  = s.frame || 0;
-  document.getElementById('s-thr').textContent  = s.threshold || 0.65;
+  document.getElementById('s-thr').textContent  = s.threshold || 0.90;
   if (startTs && s.running) {
     const sec = Math.round((Date.now() - startTs) / 1000);
     document.getElementById('s-dur').textContent = sec + 's';
@@ -548,7 +553,11 @@ function render(s) {
         const hist = scoreHist[p.id] || [];
         const bars = hist.map(v => {
           const h = Math.max(2, Math.round(v * 22));
-          const c = v > (s.threshold||.65) ? '#ef4444' : v > 0.45 ? '#f59e0b' : '#22c47a';
+          // v (p.score) is a calibrated/display-space value, so it must be
+          // compared against display_threshold, not the raw decision
+          // threshold (s.threshold) — those two numbers live in different
+          // spaces and mixing them mis-colours the sparkline.
+          const c = v > (s.display_threshold||.90) ? '#ef4444' : v > 0.45 ? '#f59e0b' : '#22c47a';
           return `<div class="mb" style="height:${h}px;background:${c}"></div>`;
         }).join('');
         const vtag = p.is_deepfake

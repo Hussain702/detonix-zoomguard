@@ -105,9 +105,6 @@ class GlobalReIDGallery:
         return best_id
 
 
-_global_reid = GlobalReIDGallery()
-
-
 # ── Math helpers ──────────────────────────────────────────────────────────────
 
 def _iou(a, b):
@@ -171,7 +168,7 @@ class Track:
     TENTATIVE, CONFIRMED, DELETED = 1, 2, 3
     _GALLERY_SIZE = 30
 
-    def __init__(self, mean, cov, tid, n_init=3, max_age=90):
+    def __init__(self, mean, cov, tid, n_init=3, max_age=90, reid_gallery=None):
         self.mean, self.covariance = mean, cov
         self.track_id = tid
         self.hits     = 1
@@ -180,6 +177,13 @@ class Track:
         self.state    = Track.TENTATIVE
         self._n_init  = n_init
         self._max_age = max_age
+
+        # Owned by the DeepSortTracker that created this Track — NOT a
+        # module-level singleton. Each tracker (one per video/session, see
+        # DeepSortTracker.__init__) gets its own gallery, so identity state
+        # can never leak between independent video sessions processed in
+        # the same run. May be None only for a bare/ad-hoc Track.
+        self._reid_gallery    = reid_gallery
 
         self.embedding       = None
         self._gallery        = []
@@ -251,7 +255,8 @@ class Track:
             self._gallery.append(emb.copy())
             if len(self._gallery) > self._GALLERY_SIZE:
                 self._gallery.pop(0)
-            _global_reid.register(self.track_id, emb)
+            if self._reid_gallery is not None:
+                self._reid_gallery.register(self.track_id, emb)
 
         if self.state == Track.TENTATIVE and self.hits >= self._n_init:
             self.state = Track.CONFIRMED
@@ -403,6 +408,14 @@ class DeepSortTracker:
         # across a track being deleted and later resurrected via Re-ID, so a
         # brief detection flicker doesn't silently reset their classification.
         self._agg_store  = {}
+        # Owned by THIS tracker instance (one tracker per video/session —
+        # see orchestrator.py, which builds a fresh DeepSortTracker per
+        # video). Previously this was a module-level global shared by every
+        # DeepSortTracker in the process, so embeddings/IDs from one video
+        # could be "recognised" in a later, completely unrelated video run
+        # in the same batch. Making it instance-owned fixes that at the
+        # source — no reliance on remembering to call reset_reid().
+        self._reid       = GlobalReIDGallery()
 
     def predict(self):
         for t in self.tracks:
@@ -425,7 +438,7 @@ class DeepSortTracker:
         # Embedding-gated new / re-ID track creation
         for di in unmatched_d:
             det = detections[di]
-            existing = _global_reid.lookup(det.embedding)
+            existing = self._reid.lookup(det.embedding)
 
             if existing is not None:
                 live = next((t for t in self.tracks
@@ -435,12 +448,13 @@ class DeepSortTracker:
                 # Resurrect deleted track with canonical ID
                 mean, cov = self.kf.initiate(det.to_xyah())
                 t = Track(mean, cov, existing,
-                          n_init=self._n_init, max_age=self._max_age)
+                          n_init=self._n_init, max_age=self._max_age,
+                          reid_gallery=self._reid)
                 if existing in self._agg_store:
                     t._temporal = self._agg_store.pop(existing)
                 if det.embedding is not None:
                     t.embedding = det.embedding.copy()
-                    src = _global_reid._store.get(existing)
+                    src = self._reid._store.get(existing)
                     if src is not None:
                         t._gallery = [src[i] for i in
                                       range(max(0, len(src) - self._n_init), len(src))]
@@ -450,11 +464,12 @@ class DeepSortTracker:
             # Genuinely new face
             mean, cov = self.kf.initiate(det.to_xyah())
             t = Track(mean, cov, self.next_id,
-                      n_init=self._n_init, max_age=self._max_age)
+                      n_init=self._n_init, max_age=self._max_age,
+                      reid_gallery=self._reid)
             if det.embedding is not None:
                 t.embedding = det.embedding.copy()
                 t._gallery  = [det.embedding.copy()]
-                _global_reid.register(self.next_id, det.embedding)
+                self._reid.register(self.next_id, det.embedding)
             self.tracks.append(t)
             self.next_id += 1
 
@@ -464,7 +479,7 @@ class DeepSortTracker:
         self.tracks = [t for t in self.tracks if not t.is_deleted()]
         for t in self.tracks:
             if t.is_confirmed() and t.embedding is not None:
-                _global_reid.update_from_track(t)
+                self._reid.update_from_track(t)
 
     def get_active_tracks(self):
         return list(self.tracks)
@@ -476,12 +491,19 @@ class DeepSortTracker:
         return [t for t in self.tracks if t.is_confirmed()]
 
     def reset_reid(self):
-        """Call between unrelated video clips to prevent ID bleed."""
-        global _global_reid
-        _global_reid = GlobalReIDGallery()
-        self.tracks     = []
-        self.next_id    = 1
-        self._agg_store = {}
+        """
+        Reset all identity state (tracks, canonical IDs, embedding gallery,
+        per-person aggregator history) for this tracker.
+
+        Since each DeepSortTracker instance now owns its own gallery, a
+        fresh DeepSortTracker() is already fully isolated — this method is
+        kept for callers that reuse one tracker instance across multiple
+        clips and want an explicit reset in between.
+        """
+        self._reid       = GlobalReIDGallery()
+        self.tracks      = []
+        self.next_id     = 1
+        self._agg_store  = {}
 
     def reset(self):
         self.reset_reid()

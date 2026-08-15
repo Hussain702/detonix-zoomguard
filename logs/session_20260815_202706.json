@@ -1,0 +1,827 @@
+{
+  "session_id": "20260815_202706",
+  "start_time": "2026-08-15T20:27:06.986373",
+  "end_time": "2026-08-15T20:32:17.327136",
+  "total_detections": 451,
+  "total_alerts": 2,
+  "alerts": [
+    {
+      "timestamp": "2026-08-15T20:27:28.704972",
+      "type": "DEEPFAKE_DETECTED",
+      "track_id": 1,
+      "score": 0.9487,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "frame": 36
+    },
+    {
+      "timestamp": "2026-08-15T20:29:50.944574",
+      "type": "DEEPFAKE_DETECTED",
+      "track_id": 3,
+      "score": 0.9401,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "frame": 504
+    }
+  ],
+  "detections": [
+    {
+      "timestamp": "2026-08-15T20:31:10.890664",
+      "frame": 810,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9215
+    },
+    {
+      "timestamp": "2026-08-15T20:31:11.944458",
+      "frame": 813,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9295
+    },
+    {
+      "timestamp": "2026-08-15T20:31:11.944458",
+      "frame": 813,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 9,
+      "is_deepfake": false,
+      "score": 0.7785
+    },
+    {
+      "timestamp": "2026-08-15T20:31:12.682043",
+      "frame": 816,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9424
+    },
+    {
+      "timestamp": "2026-08-15T20:31:13.458975",
+      "frame": 819,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9485
+    },
+    {
+      "timestamp": "2026-08-15T20:31:14.160661",
+      "frame": 822,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9467
+    },
+    {
+      "timestamp": "2026-08-15T20:31:14.865989",
+      "frame": 825,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9423
+    },
+    {
+      "timestamp": "2026-08-15T20:31:15.575648",
+      "frame": 828,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9271
+    },
+    {
+      "timestamp": "2026-08-15T20:31:16.285747",
+      "frame": 831,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9084
+    },
+    {
+      "timestamp": "2026-08-15T20:31:16.999657",
+      "frame": 834,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8208
+    },
+    {
+      "timestamp": "2026-08-15T20:31:17.825544",
+      "frame": 837,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8177
+    },
+    {
+      "timestamp": "2026-08-15T20:31:18.864998",
+      "frame": 840,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8528
+    },
+    {
+      "timestamp": "2026-08-15T20:31:18.864998",
+      "frame": 840,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 4,
+      "is_deepfake": false,
+      "score": 0.721
+    },
+    {
+      "timestamp": "2026-08-15T20:31:19.682256",
+      "frame": 843,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8826
+    },
+    {
+      "timestamp": "2026-08-15T20:31:20.377991",
+      "frame": 846,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8645
+    },
+    {
+      "timestamp": "2026-08-15T20:31:21.063149",
+      "frame": 849,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8614
+    },
+    {
+      "timestamp": "2026-08-15T20:31:22.104691",
+      "frame": 852,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8917
+    },
+    {
+      "timestamp": "2026-08-15T20:31:22.106871",
+      "frame": 852,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 4,
+      "is_deepfake": false,
+      "score": 0.7178
+    },
+    {
+      "timestamp": "2026-08-15T20:31:23.275385",
+      "frame": 855,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9149
+    },
+    {
+      "timestamp": "2026-08-15T20:31:23.275385",
+      "frame": 855,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 4,
+      "is_deepfake": false,
+      "score": 0.7175
+    },
+    {
+      "timestamp": "2026-08-15T20:31:24.164979",
+      "frame": 858,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9335
+    },
+    {
+      "timestamp": "2026-08-15T20:31:24.875242",
+      "frame": 861,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9474
+    },
+    {
+      "timestamp": "2026-08-15T20:31:25.594275",
+      "frame": 864,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9587
+    },
+    {
+      "timestamp": "2026-08-15T20:31:26.336782",
+      "frame": 867,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9657
+    },
+    {
+      "timestamp": "2026-08-15T20:31:27.058991",
+      "frame": 870,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9683
+    },
+    {
+      "timestamp": "2026-08-15T20:31:27.767066",
+      "frame": 873,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9704
+    },
+    {
+      "timestamp": "2026-08-15T20:31:28.584387",
+      "frame": 876,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9729
+    },
+    {
+      "timestamp": "2026-08-15T20:31:29.325293",
+      "frame": 879,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9737
+    },
+    {
+      "timestamp": "2026-08-15T20:31:30.026844",
+      "frame": 882,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9719
+    },
+    {
+      "timestamp": "2026-08-15T20:31:30.729920",
+      "frame": 885,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.959
+    },
+    {
+      "timestamp": "2026-08-15T20:31:31.425537",
+      "frame": 888,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9586
+    },
+    {
+      "timestamp": "2026-08-15T20:31:32.149685",
+      "frame": 891,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.961
+    },
+    {
+      "timestamp": "2026-08-15T20:31:32.875260",
+      "frame": 894,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9633
+    },
+    {
+      "timestamp": "2026-08-15T20:31:33.593254",
+      "frame": 897,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9663
+    },
+    {
+      "timestamp": "2026-08-15T20:31:34.274507",
+      "frame": 900,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.972
+    },
+    {
+      "timestamp": "2026-08-15T20:31:35.475129",
+      "frame": 903,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9706
+    },
+    {
+      "timestamp": "2026-08-15T20:31:35.475129",
+      "frame": 903,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 4,
+      "is_deepfake": false,
+      "score": 0.7163
+    },
+    {
+      "timestamp": "2026-08-15T20:31:36.189987",
+      "frame": 906,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9716
+    },
+    {
+      "timestamp": "2026-08-15T20:31:36.878878",
+      "frame": 909,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9688
+    },
+    {
+      "timestamp": "2026-08-15T20:31:37.578984",
+      "frame": 912,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9622
+    },
+    {
+      "timestamp": "2026-08-15T20:31:38.367389",
+      "frame": 915,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9669
+    },
+    {
+      "timestamp": "2026-08-15T20:31:39.131792",
+      "frame": 918,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9613
+    },
+    {
+      "timestamp": "2026-08-15T20:31:39.975865",
+      "frame": 921,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9661
+    },
+    {
+      "timestamp": "2026-08-15T20:31:40.862332",
+      "frame": 924,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9682
+    },
+    {
+      "timestamp": "2026-08-15T20:31:41.622700",
+      "frame": 927,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9694
+    },
+    {
+      "timestamp": "2026-08-15T20:31:42.348219",
+      "frame": 930,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9739
+    },
+    {
+      "timestamp": "2026-08-15T20:31:43.171984",
+      "frame": 933,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9566
+    },
+    {
+      "timestamp": "2026-08-15T20:31:43.908954",
+      "frame": 936,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8755
+    },
+    {
+      "timestamp": "2026-08-15T20:31:44.636343",
+      "frame": 939,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8793
+    },
+    {
+      "timestamp": "2026-08-15T20:31:45.358935",
+      "frame": 942,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8463
+    },
+    {
+      "timestamp": "2026-08-15T20:31:46.071549",
+      "frame": 945,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8653
+    },
+    {
+      "timestamp": "2026-08-15T20:31:46.807529",
+      "frame": 948,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.887
+    },
+    {
+      "timestamp": "2026-08-15T20:31:47.527587",
+      "frame": 951,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8611
+    },
+    {
+      "timestamp": "2026-08-15T20:31:48.253734",
+      "frame": 954,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8459
+    },
+    {
+      "timestamp": "2026-08-15T20:31:49.068820",
+      "frame": 957,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8039
+    },
+    {
+      "timestamp": "2026-08-15T20:31:49.797105",
+      "frame": 960,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8441
+    },
+    {
+      "timestamp": "2026-08-15T20:31:50.908802",
+      "frame": 963,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8765
+    },
+    {
+      "timestamp": "2026-08-15T20:31:50.908802",
+      "frame": 963,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5523
+    },
+    {
+      "timestamp": "2026-08-15T20:31:51.600540",
+      "frame": 966,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9029
+    },
+    {
+      "timestamp": "2026-08-15T20:31:52.302874",
+      "frame": 969,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9246
+    },
+    {
+      "timestamp": "2026-08-15T20:31:53.000649",
+      "frame": 972,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.925
+    },
+    {
+      "timestamp": "2026-08-15T20:31:53.699636",
+      "frame": 975,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9324
+    },
+    {
+      "timestamp": "2026-08-15T20:31:54.393774",
+      "frame": 978,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9451
+    },
+    {
+      "timestamp": "2026-08-15T20:31:55.074829",
+      "frame": 981,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9538
+    },
+    {
+      "timestamp": "2026-08-15T20:31:55.745332",
+      "frame": 984,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9437
+    },
+    {
+      "timestamp": "2026-08-15T20:31:56.432588",
+      "frame": 987,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9243
+    },
+    {
+      "timestamp": "2026-08-15T20:31:57.146327",
+      "frame": 990,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9277
+    },
+    {
+      "timestamp": "2026-08-15T20:31:57.849502",
+      "frame": 993,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9154
+    },
+    {
+      "timestamp": "2026-08-15T20:31:58.533857",
+      "frame": 996,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8965
+    },
+    {
+      "timestamp": "2026-08-15T20:31:59.227834",
+      "frame": 999,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8455
+    },
+    {
+      "timestamp": "2026-08-15T20:32:00.345002",
+      "frame": 1002,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.863
+    },
+    {
+      "timestamp": "2026-08-15T20:32:00.347008",
+      "frame": 1002,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.547
+    },
+    {
+      "timestamp": "2026-08-15T20:32:01.376629",
+      "frame": 1005,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8853
+    },
+    {
+      "timestamp": "2026-08-15T20:32:01.377645",
+      "frame": 1005,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5452
+    },
+    {
+      "timestamp": "2026-08-15T20:32:02.557047",
+      "frame": 1008,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8672
+    },
+    {
+      "timestamp": "2026-08-15T20:32:02.558932",
+      "frame": 1008,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5527
+    },
+    {
+      "timestamp": "2026-08-15T20:32:03.742949",
+      "frame": 1011,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8908
+    },
+    {
+      "timestamp": "2026-08-15T20:32:03.742949",
+      "frame": 1011,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5562
+    },
+    {
+      "timestamp": "2026-08-15T20:32:04.929806",
+      "frame": 1014,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8858
+    },
+    {
+      "timestamp": "2026-08-15T20:32:04.929806",
+      "frame": 1014,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5572
+    },
+    {
+      "timestamp": "2026-08-15T20:32:06.102286",
+      "frame": 1017,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.849
+    },
+    {
+      "timestamp": "2026-08-15T20:32:06.104294",
+      "frame": 1017,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5549
+    },
+    {
+      "timestamp": "2026-08-15T20:32:07.191354",
+      "frame": 1020,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8625
+    },
+    {
+      "timestamp": "2026-08-15T20:32:07.193409",
+      "frame": 1020,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5413
+    },
+    {
+      "timestamp": "2026-08-15T20:32:08.390221",
+      "frame": 1023,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.795
+    },
+    {
+      "timestamp": "2026-08-15T20:32:08.392350",
+      "frame": 1023,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5476
+    },
+    {
+      "timestamp": "2026-08-15T20:32:09.593082",
+      "frame": 1026,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8391
+    },
+    {
+      "timestamp": "2026-08-15T20:32:09.593082",
+      "frame": 1026,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5504
+    },
+    {
+      "timestamp": "2026-08-15T20:32:10.811283",
+      "frame": 1029,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.8709
+    },
+    {
+      "timestamp": "2026-08-15T20:32:10.811283",
+      "frame": 1029,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5558
+    },
+    {
+      "timestamp": "2026-08-15T20:32:12.009805",
+      "frame": 1032,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.884
+    },
+    {
+      "timestamp": "2026-08-15T20:32:12.017867",
+      "frame": 1032,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5594
+    },
+    {
+      "timestamp": "2026-08-15T20:32:13.266800",
+      "frame": 1035,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9054
+    },
+    {
+      "timestamp": "2026-08-15T20:32:13.268815",
+      "frame": 1035,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5604
+    },
+    {
+      "timestamp": "2026-08-15T20:32:14.455317",
+      "frame": 1038,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9253
+    },
+    {
+      "timestamp": "2026-08-15T20:32:14.456760",
+      "frame": 1038,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5584
+    },
+    {
+      "timestamp": "2026-08-15T20:32:15.688191",
+      "frame": 1041,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9398
+    },
+    {
+      "timestamp": "2026-08-15T20:32:15.690066",
+      "frame": 1041,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.5604
+    },
+    {
+      "timestamp": "2026-08-15T20:32:16.936069",
+      "frame": 1044,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 1,
+      "is_deepfake": true,
+      "score": 0.9339
+    },
+    {
+      "timestamp": "2026-08-15T20:32:16.938078",
+      "frame": 1044,
+      "video": "input_videos\\01__meeting_serious.mp4",
+      "track_id": 8,
+      "is_deepfake": false,
+      "score": 0.561
+    }
+  ]
+}

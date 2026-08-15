@@ -57,8 +57,21 @@ def parse_args():
     p.add_argument('--video',      default=None)
     p.add_argument('--output',     default='output_results')
     p.add_argument('--model',      default=None)
-    p.add_argument('--threshold',  type=float, default=0.65)
-    p.add_argument('--skip',       type=int,   default=3)
+    p.add_argument('--threshold',  type=float, default=None,
+                   help='Override the production FAKE decision threshold '
+                        '(raw XceptionNet probability space, valid range '
+                        '0.70-0.97). If omitted, the threshold in '
+                        'calibration.json is used if present, otherwise the '
+                        'validated default (0.90). This is the ONLY '
+                        'decision threshold in the system — there is no '
+                        'separate "display" threshold.')
+    p.add_argument('--skip',       type=int,   default=3,
+                   help='Run deepfake inference every N frames. NOTE: the '
+                        'temporal thresholds (MIN_FRAMES_DEEPFAKE, '
+                        'HYSTERESIS_FRAMES, etc.) count INFERENCE '
+                        'OBSERVATIONS, not raw video frames — increasing '
+                        '--skip proportionally increases how long (in '
+                        'wall-clock time) it takes to reach a verdict.')
     p.add_argument('--no-display', action='store_true',
                    help='Disable live preview window (required for headless OpenCV)')
     p.add_argument('--dashboard',  action='store_true',
@@ -205,6 +218,19 @@ def main():
     setup_logging('logs')
     logger = logging.getLogger("Main")
 
+    # ── Decision threshold ────────────────────────────────────────────────────
+    # Single source of truth: TemporalAggregator.FAKE_RAW_THR. calibration.json
+    # (loaded above, at import time) sets it first if present; an explicit
+    # --threshold on the command line takes precedence over that, since it's
+    # the more specific, more recently-expressed operator intent. If neither
+    # is given, the validated built-in default (0.90) stands.
+    if args.threshold is not None:
+        try:
+            TemporalAggregator.set_threshold(args.threshold, source="--threshold")
+        except ValueError as exc:
+            print(f"\n  [ERROR] {exc}\n")
+            sys.exit(1)
+
     # ── Display capability check ──────────────────────────────────────────────
     show_display = not args.no_display
     if show_display:
@@ -229,9 +255,13 @@ def main():
             logger.warning("Dashboard could not start: %s", exc)
 
     # ── Build config ──────────────────────────────────────────────────────────
+    # NOTE: no 'deepfake_threshold' key here — the decision threshold lives
+    # exclusively in TemporalAggregator.FAKE_RAW_THR (set above), which is
+    # what orchestrator.py actually reports to logs/dashboard. Threading a
+    # second copy of the value through config was what let it silently drift
+    # from the real decision boundary before.
     config = {
         'model_path':             args.model,
-        'deepfake_threshold':     args.threshold,
         'process_every_n_frames': args.skip,
         'face_confidence':        args.face_conf,
         'min_face_size':          args.min_face_size,
@@ -262,7 +292,7 @@ def main():
         sys.exit(1)
 
     print(f"\n  Found {len(videos)} video(s)  |  "
-          f"threshold: {args.threshold}  |  "
+          f"threshold: {TemporalAggregator.FAKE_RAW_THR:.4f}  |  "
           f"skip: {args.skip}  |  "
           f"display: {'on' if show_display else 'off'}")
     if args.dashboard:

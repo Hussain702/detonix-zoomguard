@@ -61,12 +61,41 @@ def _to_rgb(frame: np.ndarray) -> np.ndarray:
     return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 def _make_crop(frame: np.ndarray, x: int, y: int,
-               w: int, h: int, pad_frac: float = 0.15) -> np.ndarray:
+               w: int, h: int, scale: float = 1.3) -> np.ndarray:
+    """
+    Crop the region the deepfake classifier actually sees.
+
+    This MUST match the crop geometry the checkpoint was trained with, or
+    every score is computed on an out-of-distribution input. This project's
+    XceptionNet checkpoint (deepfake_c0_xception.pkl) traces to the standard
+    FaceForensics++ Xception training pipeline, whose face crop is:
+    a SQUARE region, centered on the detected face box, sized at `scale`x
+    (default 1.3, matching that pipeline exactly) the face box's longer
+    side, then resized directly — never a stretched rectangle.
+
+    The previous version here took the raw (usually non-square) detector
+    bbox, padded it by a flat 15%, and force-resized that rectangle into a
+    square output. That silently (a) warps/stretches every face by a
+    different amount depending on its aspect ratio, since forcing a
+    non-square region into a square resize is a non-uniform stretch, and
+    (b) frames much tighter than training time (roughly 1.15x vs 1.3x, and
+    off-center in whichever dimension was oddly-shaped). XceptionNet is
+    known to be sensitive to exactly this kind of crop mismatch — it is a
+    well-documented cause of real faces scoring as FAKE with this
+    checkpoint lineage when a different face detector/crop convention is
+    used at inference time than at training time.
+    """
     fh, fw = frame.shape[:2]
-    pad    = int(min(w, h) * pad_frac)
-    x1, y1 = max(0, x - pad), max(0, y - pad)
-    x2, y2 = min(fw, x + w + pad), min(fh, y + h + pad)
-    crop   = frame[y1:y2, x1:x2]
+    cx, cy = x + w / 2.0, y + h / 2.0
+    size   = max(1, int(max(w, h) * scale))
+    size   = min(size, fw, fh)  # never larger than the frame itself
+
+    x1 = int(round(cx - size / 2.0))
+    y1 = int(round(cy - size / 2.0))
+    x1 = max(0, min(x1, fw - size))
+    y1 = max(0, min(y1, fh - size))
+
+    crop = frame[y1:y1 + size, x1:x1 + size]
     if crop.size == 0:
         return np.zeros((_CROP_SIZE, _CROP_SIZE, 3), dtype=np.uint8)
     return cv2.resize(crop, (_CROP_SIZE, _CROP_SIZE), interpolation=cv2.INTER_LINEAR)
